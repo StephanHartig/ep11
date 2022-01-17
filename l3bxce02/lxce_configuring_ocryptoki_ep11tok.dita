@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_configuring_ocryptoki_ep11tok" xml:lang="en-us">
+  <title>Configuring <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> for <keyword
+      conref="lxce_conref.dita#l31xce00_conref/ep11"/> support</title>
+  <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+  <titlealts>
+    <navtitle>Configuring openCryptoki for EP11 support</navtitle>
+    <searchtitle>Configuring openCryptoki for EP11 support</searchtitle>
+  </titlealts>
+  <shortdesc>After a successful installation of <keyword
+      conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>, you need to perform certain
+    configuration and customization tasks to enable the exploitation of the <keyword
+      conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> functions from applications.
+    Especially,  you need to set up tokens and daemons and then initialize the tokens.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/><indexterm>installing and configuring</indexterm></indexterm>
+        <indexterm>configuring openCryptoki</indexterm>
+        <indexterm>openCryptoki<indexterm>configuring</indexterm></indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <conbody>
+    <p><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>, and in particular the slot
+manager, can handle several tokens, which can have different support for different hardware devices
+or software solutions. As shown in <xref href="lxce_stack.dita#l31xce00_stack/f_ep11_overview"/>,
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> interacts with the host part of
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>. <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> can operate with the Crypto Express adapter with
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware load for <ph rev="i1"
+>symmetric</ph> and asymmetric cryptographic functions.</p>
+    <p>For a complete configuration of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>, finish the tasks as described in the contained
+subtopics.</p>
+<ul otherprops="pdf">
+<li><xref href="lxce_settingup_token_daemon.dita#l31xce00_settingup_token_daemon"/></li>
+<li><xref href="lxce_ep11_conffile.dita"/></li>
+<li><xref href="lxce_setting_environment_variables.dita#l31xce00_setting_envorinment_variables"
+/></li>
+<li><xref href="lxce_initializing_ep11token.dita#l31xce00_initializing_ep11token"/></li>
+</ul>
+    <p>Finally, to control your configuration results, follow the instructions provided in <xref
+href="lxce_recognize.dita#l31xce00_recognize"/>.</p>
+  </conbody>
+  <?Pub Caret -1?>
+</concept>
+<?Pub *0000001652?>

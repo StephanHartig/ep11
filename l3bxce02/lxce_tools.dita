@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="lxce_tools" xml:lang="en-us">
+<title>Tools and utilities</title>
+<titlealts>
+<navtitle>Tools and utilities</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>: Tools and
+utilities</searchtitle>
+</titlealts>
+<shortdesc rev="i1v2">Various tools and utilities are available which provide general information
+about <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>, which support you in migrating
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> master keys, and which help you to manage
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> sessions.</shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>tools<indexterm>ep11info</indexterm><indexterm>pkcsep11_migrate</indexterm><indexterm>pkcsep11_session</indexterm></indexterm>
+<indexterm>utilities<indexterm>ep11info</indexterm><indexterm>pkcsep11_migrate</indexterm><indexterm>pkcsep11_session</indexterm></indexterm>
+<indexterm>ep11info</indexterm>
+<indexterm>pkcsep11_migrate</indexterm>
+<indexterm>pkcsep11_session</indexterm>
+</keywords>
+<?Pub Caret 141?>
+</metadata>
+</prolog>
+<refbody>
+<section otherprops="pdf" rev="i1v2">
+<p>The available utilities are introduced in :</p>
+<ul>
+<li><cmdname>ep11info</cmdname> in <xref href="lxce_ep11info.dita#lxce_ep11info"/></li>
+<li><cmdname>pkcsep11_migrate</cmdname> in <xref
+href="lxce_managing_mkeys.dita#l31xce00_managing_mkeys"/></li>
+<li><cmdname>pkcsep11_session</cmdname> in <xref href="lxce_ep11session.dita#lxce_ep11sesion"/>
+</li>
+</ul>
+</section>
+</refbody>
+</reference>
+<?Pub *0000003180?>

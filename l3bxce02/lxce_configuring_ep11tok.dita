@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_configuring_ep11tok" xml:lang="en-us">
+ <title>Adding <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/> to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></title>
+  <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+ <titlealts>
+  <navtitle>Adding <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/> to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></navtitle>
+  <?Pub Caret -1?>
+  <searchtitle>Adding <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/> to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></searchtitle>
+ </titlealts>
+ <shortdesc>You need to introduce one or multiple tokens of type <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>) into the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> library. For this purpose, you must define a
+slot entry for each desired token in the global <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration file <ph rev="iv3">called
+<filepath>opencryptoki.conf</filepath></ph>.</shortdesc>
+ <prolog>
+  <metadata>
+   <keywords>
+    <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/><indexterm>configuring</indexterm></indexterm>
+    <indexterm id="configuring">configuring <indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></indexterm><indexterm>multiple <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/></indexterm></indexterm>
+<indexterm>multiple <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"
+/><indexterm>configuring</indexterm></indexterm>
+        <indexterm>configuration file<indexterm>ep11tok01.conf</indexterm></indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"
+/><indexterm>ep11tok01.conf</indexterm></indexterm>
+        <indexterm>ep11tok01.conf configuration file</indexterm>
+        <indexterm>environment variables</indexterm>
+        <indexterm>APQN_WHITELIST</indexterm>
+        <indexterm>key word APQN_WHITELIST</indexterm>
+        <indexterm>APQN_ANY</indexterm>
+        <indexterm>key word APQN_ANY</indexterm>
+        <indexterm>adapter/domain pair<indexterm>APQN</indexterm></indexterm>
+<indexterm>APQN<indexterm>adapter/domain pair</indexterm></indexterm>
+        <indexterm>adapter<indexterm>assigning domains</indexterm></indexterm>
+<indexterm>tokname</indexterm>
+<indexterm>confname</indexterm>
+<indexterm><filepath>opencryptoki.conf</filepath></indexterm>
+   </keywords>
+  </metadata>
+ </prolog>
+ <conbody>
+<p rev="iv3">If you want to configure multiple <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>, you can assign dedicated adapters and
+domains to different tokens respectively. This ensures data isolation between multiple
+applications.</p>
+<p>If you use multiple <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>, you must
+specify a unique token directory <ph rev="iv3">in the slot entry for each token, using the
+<codeph>tokname</codeph> attribute. This token directory receives the token-individual information
+(like for example, key objects, user PIN, SO PIN, or hashes). Thus, the information for a certain
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is separated from other <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>.</ph>
+</p>
+<p>The default <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> directory is
+<filepath>/var/lib/opencryptoki/ep11tok/</filepath>. <ph rev="iv3">You can use the default only for
+a single <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. Resulting examples for
+multiple <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> directories can be: </ph>
+<codeblock>
+/var/lib/opencryptoki/ep11token1/
+/var/lib/opencryptoki/ep11token2/
+</codeblock></p>
+<note rev="iv3">A certain token configuration applies to all applications that use this <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>.</note>
+<section><title>Adding a slot entry for each applicable <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> in <filepath>opencryptoki.conf</filepath>
+</title><indexterm>slot entry,
+defining</indexterm><indexterm><filepath>opencryptoki.conf</filepath></indexterm><p>As already
+mentioned, the default <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration
+file <codeph>opencryptoki.conf</codeph> provides a slot entry for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. It is preconfigured to slot #4. <ph rev="iv3"
+>Each slot entry must set the <codeph>stdll</codeph> attribute to
+<codeph>libpkcs11_ep11.so</codeph>.</ph> Check this default entry to find out whether you can use it
+as is.</p><p>For each configured <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, you
+must create a specific <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"/>. This
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>-specific configuration file defines the
+target adapters and target adapter domains to which the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> sends its cryptographic requests.</p><p>In
+turn, each slot entry in the global <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+configuration file must specify this <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"/>. For this purpose, use the
+<codeph>confname</codeph> attribute with the unique name of the respective <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"/> as value. </p>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"/></indexterm>
+<p>The example from <xref href="#l31xce00_configuring_ep11tok/lxce_global_ock_configfile"
+format="dita"/> configures two <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/> in
+slots 4 and 5. It defines the names of the specific token configuration files to be
+<codeph>ep11tok01.conf</codeph> and <codeph>ep11tok02.conf</codeph>. Per default, these files are
+searched in the directory where <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+searches its global configuration file.   <xref
+href="lxce_ep11_conffile.dita#lxce_ep11_conffile/lxce_ep11tok_config"/> shows an example of an
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokconfig"/>.</p><?Pub Caret 109?><fig
+id="lxce_global_ock_configfile" rev="i1v2" expanse="column">
+<title>Multiple <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> instances</title>
+<screen>
+slot 4
+{
+stdll = libpkcs11_ep11.so
+confname = ep11tok01.conf
+tokname = ep11token01 
+description = "Ep11 Token"
+manufacturer = "IBM"
+hwversion = "4.11"
+firmwareversion = "2.0"
+}
+
+slot 5
+{
+stdll = libpkcs11_ep11.so
+confname = ep11tok02.conf
+tokname = ep11token02 
+}
+
+</screen>
+</fig>
+</section>
+<section rev="iv3">
+<title>Setting an option for a FIPS compliant token data format</title>
+<p>Starting with <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.12, you can
+optionally use only FIPS compliant operations for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>'s login password hashing and for encrypting the
+stored token data. This is valid for <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"
+/>, <keyword conref="lxce_conref.dita#l31xce00_conref/libica"/> tokens, CCA tokens and Soft Tokens.
+Being FIPS compliant, for a new token directory, the token data is stored in a format that is better
+protected against attacks than the previously used data format.</p>
+<p>If you want to use the token data format that was generated with FIPS compliant operations, you
+must explicitly specify the <codeph>tokversion</codeph> option for the token's slot entry in the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration file. You must do this
+before token initialization with the <cmdname>pkcsconf</cmdname> command, for example: <fig
+expanse="column" id="tokversion">
+<title>Slot entry for an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> with FIPS
+compliant data format in the opencryptoki.conf file</title>
+<screen>
+slot 4
+{
+stdll = libpkcs11_ep11.so
+confname = ep11tok01.conf
+tokname = ep11token01 
+<b>tokversion = 3.12</b>
+description = "Ep11 Token"
+manufacturer = "IBM"
+hwversion = "4.11"
+firmwareversion = "2.0"
+}</screen>
+</fig></p>
+<p>You can use the <cmdname>pkcstok_migrate</cmdname> utility to transform an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, a CCA token, an ICA token, or a Soft Token
+created with any version of <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> into a data
+format that was generated by FIPS compliant operations. </p>
+ <p>The <cmdname>pkcstok_migrate</cmdname> tool converts all token data produced with <ph rev="iv3"
+>any <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></ph> version, including PINs, to
+be encrypted with a FIPS compliant method. Without this tool, switching to the new token format is
+only possible with an empty repository. The new FIPS compliant format can be used by specifying the
+<codeph>tokversion</codeph> keyword in the token’s slot configuration in
+<filepath>opencryptoki.conf</filepath> as shown in <xref
+href="#l31xce00_configuring_ep11tok/tokversion" format="dita"/>. For a value of
+<codeph>3.12</codeph> or greater, the new format is used. Values lower than <codeph>3.12</codeph>
+are invalid. <ph rev="iv3">To ensure compatibility with key objects generated using older versions
+of <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>,</ph> the old format is still the
+default. The new format is only used when the user explicitly adds the <codeph>tokversion</codeph>
+keyword to the <filepath>opencryptoki.conf </filepath> file.</p><p>For information on how to use this tool, see <xref href="lxce_pkcstok_migrate.dita"/>.</p>
+</section>
+ </conbody>
+</concept>
+<?Pub *0000000808?>

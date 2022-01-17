@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_assign_adapters_guests" xml:lang="en-us">
+<title>Assigning <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> adapters as dedicated
+adapters to <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guests</title>
+<!--SH: Acrolinx to be performed as soon as input is ready-->
+<titlealts>
+<navtitle>Assigning <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> adapters as dedicated
+adapters to <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guests</navtitle>
+<searchtitle>Assigning <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> adapters as
+dedicated adapters to <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guests</searchtitle>
+</titlealts>
+<shortdesc>On a <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guest, you can authorize
+the user to define virtual cryptographic facilities and provide the guest access to the AP queues on
+the PCI cryptographic cards. You achieve this with the help of the CRYPTO directory statement using
+the <cmdname>DOMAIN</cmdname> and <cmdname>APDEDicated</cmdname> operands.</shortdesc>
+<prolog><metadata>
+<keywords><indexterm>dedicated adapters</indexterm><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> adapters</indexterm>
+<indexterm>z/VM guests</indexterm>
+<indexterm>adapters<indexterm>dedicated <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/> adapters</indexterm></indexterm>
+<indexterm>CRYPTO APVIRTual<indexterm>Domain operand</indexterm><indexterm>APDEDicated
+operand</indexterm></indexterm>
+<indexterm>directory statement <indexterm>CRYPTO APVIRTual</indexterm></indexterm>
+<indexterm>Domain operand</indexterm>
+<indexterm>APDEDicated operand</indexterm>
+<indexterm>QUERY CRYPto DOMains</indexterm></keywords><?Pub Caret 45?>
+</metadata></prolog>
+<conbody>
+<p> The <cmdname>DOMAIN</cmdname> operand specifies up to 16 domains the virtual machine may use.
+The <cmdname>APDEDicated</cmdname> operand specifies up to 64 APs the virtual machine may use for
+dedicated access to the Adjunct Processor (AP) cryptographic facility. You can specify as many
+CRYPTO statements as you need to assign domains or APs to the virtual machine.</p>
+<p rev="i2">You can use the <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> CP command
+<cmdname>QUERY CRYPto DOMains</cmdname> to request the display of the status of the cryptographic
+hardware and of installed AP domains.</p>
+<note rev="i3">The <cmdname>CRYPTO APVIRTual</cmdname> directory statement cannot be used with the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/>. </note>
+<p rev="i2">For more information, see also <cite>z/VM CP Planning and Administration</cite> and
+<cite>z/VM CP Commands and Utilities Reference</cite> from the <xref
+href="www.ibm.com/support/knowledgecenter/SSB27U_6.3.0/com.ibm.zvm.v630/zvminfoc03.htm"
+format="html" scope="external">IBM Knowledge Center</xref>.</p>
+</conbody>
+</concept>
+<?Pub *0000000904?>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<map id="body_ep11_token" title="Exploiting Enterprise PKCS #11 using openCryptoki" xml:lang="en-US">
+<!-- *** Chapter 1: Introduction *** -->
+<topicref href="lxce_intro.dita">
+<topicref href="lxce_whatis_pkcs11.dita"/>
+<topicref href="lxce_whatis_opencryptoki.dita"/>
+<topicref href="lxce_whatis_ep11_cex4p.dita"/>
+</topicref>
+<!-- *** Chapter 2: The EP11 crypto stack *** -->
+<topicref href="lxce_stack.dita">
+<topicref href="lxce_stackoverview.dita"/>
+</topicref>
+<!-- *** Chapter 3: Building the EP11 crypto stack *** -->
+<topicref href="lxce_building_stack.dita">
+<topicref href="lxce_preparing_cex4p.dita">
+<topicref href="lxce_domains.dita"/>
+<topicref href="lxce_adapter_domains.dita"/>
+<topicref href="lxce_config_fw_cex4p.dita"/>
+<topicref href="lxce_assign_adapters_guests.dita"/>
+</topicref>
+<topicref href="lxce_installing_zcrypt.dita"/>
+<topicref href="lxce_installing_hostpart.dita"/>
+<topicref href="lxce_setting_mk.dita"/>
+<topicref href="lxce_installing_ocryptoki.dita"/>
+<!--<topicref href="lxce_configuring_pkcs11impl.dita"/>-->
+</topicref>
+<!-- *** Chapter 4: Configuring openCryptoki for EP11 support *** -->
+<topicref href="lxce_configuring_ocryptoki_ep11tok.dita">
+<topicref href="lxce_settingup_token_daemon.dita">
+<topicref href="lxce_configuring_ep11tok.dita"/>
+</topicref>
+<topicref href="lxce_ep11_conffile.dita"/>
+<topicref/>
+<topicref href="lxce_initializing_ep11token.dita"/>
+<topicref href="lxce_recognize.dita"/>
+</topicref>
+<!-- *** Chapter 5: Using an EP11 token *** -->
+<topicref href="lxce_using_ep11_token.dita">
+<topicref href="lxce_mechanisms.dita">
+<topicref href="lxce_filter_mechanisms.dita"/>
+</topicref>
+<topicref href="lxce_importing_keys.dita"/>
+<topicref href="lxce_quantum_safe.dita"/>
+<topicref href="lxce_elliptic.dita"/>
+<topicref href="lxce_reencrypt.dita"/>
+<topicref href="lxce_cont_point_compliance.dita"/>
+<topicref href="lxce_limiting_usability.dita"/>
+<topicref href="lxce_restrictions.dita"/>
+<topicref href="lxce_extended_evaluations.dita"/>
+</topicref>
+<!-- *** Chapter 6: Troubleshooting EP11 *** -->
+<topicref href="lxce_troubleshooting.dita">
+<topicref href="lxce_trouble_ddstatus.dita"/>
+<topicref href="lxce_trouble_ep11tokenstatus.dita"/>
+<topicref href="lxce_trouble_ep11tokenlogging.dita"/>
+</topicref>
+<!-- *** Chapter 7: Tools and utilities *** -->
+<topicref href="lxce_tools.dita">
+<topicref href="lxce_ep11info.dita"/>
+<topicref href="lxce_managing_mkeys.dita"/>
+<!--<topicref href="lxce_ep11session.dita"/> **** migrated to openCryptoki book-->
+<topicref href="lxce_pkcstok_migrate.dita"/>
+</topicref>
+<!-- *** Chapter 8: Programming examples for openCryptoki *** -->
+<topicref href="lxce_examples.dita">
+<topicref href="lxce_linklib_base_samples.dita"/>
+<topicref href="lxce_linklib_session_samples.dita"/>
+<topicref href="lxce_linklib_object_samples.dita"/>
+<topicref href="lxce_linklib_crypto_samples.dita"/>
+</topicref>
+</map>
+<?Pub *0000004609?>

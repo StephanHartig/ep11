@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE ibmbook PUBLIC "-//IBM//DTD DITA IBM BookMap//EN"
+ "ibmbook.dtd">
+<?Pub Sty _display FontColor="red"?>
+<ibmbook xml:lang="en-us">
+<ibmbooktitle>
+<ibmbooklibrary><titleline><ph conref="lxcommon.dita#phrases/lib_title"/>
+</titleline></ibmbooklibrary>
+<ibmmainbooktitle>
+<titleline>Exploiting <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11long"/> using <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> 3.15</titleline></ibmmainbooktitle>
+<ibmshorttitle>Exploiting EP11 using <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"
+/></ibmshorttitle>
+</ibmbooktitle>
+<bookmeta>
+<authorinformation id="corp">
+<organizationinfo><namedetails><organizationnamedetails>
+<organizationname>IBM Deutschland Research &amp; Development GmbH</organizationname>
+</organizationnamedetails></namedetails>
+<addressdetails><administrativearea>Information Development</administrativearea><term>Department
+      3282</term><thoroughfare>Schoenaicher Strasse 220</thoroughfare><locality><localityname>71032
+       Boeblingen</localityname></locality><country>Germany</country></addressdetails>
+<emailaddresses><emailaddress>eservdoc@de.ibm.com</emailaddress>
+</emailaddresses></organizationinfo>
+</authorinformation>
+<publisherinformation><printlocation> </printlocation>
+</publisherinformation>
+<prodinfo><prodname>EP11</prodname>
+<vrmlist>
+<vrm version=""/>
+</vrmlist>
+</prodinfo>
+<bookid><booknumber>SC34-2713-02</booknumber><maintainer href="#corp">
+</maintainer></bookid>
+<bookrights>
+<copyrfirst>
+<year>2014</year>
+</copyrfirst>
+<copyrlast>
+<year>2020</year>
+</copyrlast><bookowner>
+<organization>IBM</organization>
+</bookowner>
+<!--<bookrestriction value="confidential"/>--></bookrights>
+</bookmeta>
+<ibmfrontmatter>
+<specialnotices href="lxcommon_specialnotice.dita"/>
+<editionnotices href="lxce_book_editionnotices.dita">
+</editionnotices>
+<frontbooklists>
+<toc/>
+<figurelist/>
+<tablelist/></frontbooklists>
+<topicref href="lxce_soc.dita">
+<!--Keep only the three most current.-->
+<topicref href="lxce_new_for_ock312.dita"/>
+<topicref href="lxce_new_for_ock310.dita"/>
+</topicref>
+<preface href="lxce_about_this_document.dita">
+<topicref href="lxce_book_organized.dita"/>
+<topicref href="lxce_terms.dita"/>
+<topicref href="lxce_audience.dita">
+</topicref>
+<topicref href="lxce_distro.dita"></topicref>
+<topicref href="lxcommon_library.dita"/>
+</preface>
+</ibmfrontmatter>
+<chapter format="ditamap" href="l3bxce02_body.ditamap"/>
+<ibmbackmatter>
+<topicref href="lxcommon_accessibility.dita">
+</topicref>
+<topicref href="lxcommon_notices.dita">
+<topicref href="lxce_trademarks.dita">
+</topicref>
+</topicref>
+<backbooklists>
+<glossarylist href="lxce_glossary.dita">
+</glossarylist>
+<indexlist/></backbooklists>
+</ibmbackmatter>
+</ibmbook>

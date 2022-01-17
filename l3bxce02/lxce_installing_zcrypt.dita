@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<?Pub Sty _display FontColor="red"?>
+<task id="l31xce00_installing_zcrypt" xml:lang="en-us" rev="i1v2">
+<title>Installing and loading the cryptographic device driver</title>
+<titlealts>
+<navtitle>Installing and loading the cryptographic device driver</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>: Installing and loading the
+cryptographic device driver</searchtitle>
+</titlealts>
+<shortdesc>You need an installed Linux kernel that includes the cryptographic device driver. This
+cryptographic device driver is normally included in the regular kernel package shipped with your
+<keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> distribution. Loading the  cryptographic
+device driver is only required for earlier installations as described in this topic. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>Linux <keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device
+driver<indexterm>loading</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device
+driver<indexterm>loading</indexterm></indexterm>
+<indexterm>device driver<indexterm>loading</indexterm><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/apmodule"/> main module</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/></indexterm>
+<indexterm>z90crypt<indexterm>alias name</indexterm></indexterm>
+<indexterm>alias name for z90crypt</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/apmodule"/> module</indexterm>
+<indexterm>loading Linux <keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device
+driver</indexterm></keywords>
+</metadata></prolog>
+<taskbody>
+<context>
+<p>In earlier <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> distributions, the
+cryptographic device driver is shipped as a single module called <cmdname>z90crypt</cmdname>. In
+more recent distributions, the cryptographic device driver is shipped as set of modules with the
+<cmdname>ap</cmdname> module being the main module that triggers loading all required sub-modules.
+There is, however, an alias name <cmdname>z90crypt</cmdname> that links to the <cmdname>ap</cmdname>
+main module.</p>
+<p>There are distributions using kernel levels starting with 4.10, that have basic cryptographic
+device driver support as part of the kernel (that is, the <cmdname>ap</cmdname> module is already
+compiled in the kernel). In this case, loading the <cmdname>ap</cmdname> main module with the
+<cmdname>modprobe</cmdname> command is no longer needed. In addition, the
+<parmname>domain</parmname> and <parmname>poll_thread</parmname> parameters are no longer module
+parameters, but kernel parameters. In this case, you can change the values directly via sysfs, or
+change as kernel parameters. Refer to the <cite>Device Drivers, Features, and Commands</cite> for
+kernel 4.12 or later on the <xref
+href="https://www.ibm.com/developerworks/linux/linux390/development_docu_rollback.html"
+format="html" scope="external">developerWorks</xref> website for further information.</p>
+</context>
+<steps>
+<step>
+<cmd>For installations with a loadable cryptographic device driver, use the <cmdname>lsmod</cmdname>
+command to find out if either the <cmdname>z90crypt</cmdname> or the <cmdname>ap</cmdname> module is
+already loaded.</cmd>
+</step>
+<step>
+<cmd>If required, use the <cmdname>modprobe</cmdname> command to load the
+<cmdname>z90crypt</cmdname> or <cmdname>ap</cmdname> module. When loading the
+<cmdname>z90crypt</cmdname> or <cmdname>ap</cmdname> module, you can use the following optional
+module parameters:</cmd>
+<info>
+<parml>
+<plentry>
+<pt><codeph>domain=</codeph></pt>
+<pd>Use an integer that identifies the default cryptographic domain for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> instance. You define cryptographic domains in the
+LPAR activation profile on the HMC or SE. The default value (<parmname>domain=autoselect</parmname>)
+causes the device driver to choose one of the available domains automatically. <note type="other"
+othertype="Important">Be sure to enter an existing domain. The Trusted Key Entry workstation does
+not find the cryptographic adapters if a non-existing domain is entered here.</note><p>After loading
+the device driver, use the <cmdname>lszcrypt</cmdname> command with the <codeph>-b</codeph> option
+to confirm that the correct domain is used. If your distribution does not include this command, see
+the version of <cite>Device Drivers, Features, and Commands</cite> that applies to your distribution
+about how to use the sysfs interface to find out the domain.</p><p>If the cryptographic device
+driver is part of the kernel, you cannot unload it. In this case, you can directly edit domain
+settings via sysfs.</p></pd>
+</plentry>
+<plentry>
+<pt><codeph>poll_thread=</codeph></pt>
+<pd>enables the polling thread for instances of <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> on <keyword
+conref="lxce_conref.dita#l31xce00_conref/zvm"/> and for <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> instances that run in LPAR mode on an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> mainframe earlier than <keyword
+conref="lxce_conref.dita#l31xce00_conref/z10"/>. <p>For <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> instances that run in LPAR mode on a <keyword
+conref="lxce_conref.dita#l31xce00_conref/z10"/> or later mainframe, this setting is ignored and AP
+interrupts are used instead.</p></pd>
+</plentry>
+</parml>
+<p>For more information about these module parameters, the polling thread, and AP interrupts, see
+the version of <cite>Device Drivers, Features, and Commands</cite> that applies to your
+distribution.</p>
+</info>
+</step>
+</steps>
+<result>The <keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver that contains
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> extension is loaded and
+<cmdname>lszcrypt</cmdname> displays the cryptographic adapters available to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> system. </result>
+</taskbody>
+</task>
+<?Pub *0000003073?>

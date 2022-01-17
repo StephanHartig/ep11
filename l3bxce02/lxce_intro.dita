@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_intro" xml:lang="en-us">
+<title>Introduction</title>
+  <!--SH: Acrolinx run on Apr. 8, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Introduction</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>:
+Introduction</searchtitle>
+</titlealts>
+<shortdesc> The <keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/>
+<keyword id="pkcs11long">Enterprise PKCS #11</keyword> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>) enablement allows applications to use a <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API to run secure key cryptographic operations on
+an <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> Crypto Express adapter that is
+configured as an <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>. The CEX4S adapter
+card is the first Crypto Express adapter which can be configured as an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor.</shortdesc><?Pub Caret 135?>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/><indexterm>general
+information</indexterm></indexterm><indexterm>introduction</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/></indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/></indexterm>
+<indexterm>secure key infrastructure</indexterm></keywords>
+</metadata></prolog>
+<conbody>
+<p> The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> comprises several components
+that need to be installed and configured within certain locations of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11stack"/> as described in <xref
+href="lxce_stack.dita#l31xce00_stack"/>. </p>
+<p>An application&apos;s request is first submitted to a <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API, implemented by the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> library and the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. From this token, the request is propagated to
+the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>. The request is then processed
+on this coprocessor. The resulting output is finally returned to the application across the involved
+interfaces.</p>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> cryptography architecture offers a
+secure key infrastructure.</p>
+<p rev="i1v2">This introduction provides information about the standard software that is used in
+this implementation and about the used <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> (shortly referred to as <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>, which stands for any type of a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>). </p>
+</conbody>
+</concept>
+<?Pub *0000002791?>

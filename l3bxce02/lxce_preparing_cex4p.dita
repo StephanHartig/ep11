@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_preparing_cex4p" xml:lang="en-us">
+<title>Preparing the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></title>
+<!--SH: Acrolinx run on Apr. 10, 2014, does not show any flags-->
+<titlealts>
+<navtitle>Preparing the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Preparing the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></searchtitle>
+</titlealts>
+<shortdesc>To take advantage of the hardware-accelerated support for crypto operations from a
+<keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter, you must switch the CEX*S
+adapter into the <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> mode. This
+modification enables the installed and required <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware <ph rev="iv3">(module part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> library)</ph> to run on this adapter.</shortdesc><?Pub Caret 173?>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"
+/><indexterm>preparing</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"></keyword><indexterm>preparing</indexterm></indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<p> <ph otherprops="pdf">The required information is presented in
+the following subtopics: </ph><ul otherprops="pdf">
+<li><xref href="lxce_domains.dita"></xref></li>
+<li><xref href="lxce_adapter_domains.dita"/></li>
+<li><xref href="lxce_config_fw_cex4p.dita"/></li>
+<li><xref href="lxce_assign_adapters_guests.dita"></xref></li>
+<li><xref href="lxce_extended_evaluations.dita#l31xce00_extended_evaluations"/></li>
+</ul></p>
+</conbody>
+</concept>
+<?Pub *0000001649?>

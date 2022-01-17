@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_recognize" xml:lang="en-us">
+<title>How to recognize an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/></title>
+	<!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>How to recognize an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+instance</navtitle>
+<searchtitle>How to recognize an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+instance</searchtitle>
+</titlealts><abstract>   <shortdesc>You can use the <cmdname>pkcsconf -t</cmdname> command to display a table that shows
+			all available tokens. You can check the slot and token information, and the PIN status
+			at any time.</shortdesc>  </abstract>
+<prolog><metadata>
+<keywords><indexterm>status information</indexterm><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword><indexterm>status
+      information</indexterm></indexterm><indexterm>pkcsconf -t</indexterm>
+				<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+						/><indexterm>status information</indexterm></indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<section>    <p>The following information provided by the <cmdname>pkcsconf -t</cmdname> command about the
+					<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is returned
+				in the <term>Token Info</term> section, where, for example, <codeph>Token #1
+					Info</codeph> displays information about the token plugged into slot number
+				1.<screen>
+$ pkcsconf -t
+
+Token #1 Info:
+       Label: ep11                          
+	Manufacturer: IBM Corp.                       
+	Model: IBM EP11Tok     
+	Serial Number: 123             
+	Flags: 0x880<b>4</b>45 
+          (RNG|LOGIN_REQUIRED|CLOCK_ON_TOKEN|<b>TOKEN_INITIALIZED</b>|USER_PIN_TO_BE_CHANGED
+           |SO_PIN_TO_BE_CHANGED)
+	Sessions: 0/-2
+	R/W Sessions: -1/-2
+	PIN Length: 4-8
+	Public Memory: 0xFFFFFFFF/0xFFFFFFFF
+	Private Memory: 0xFFFFFFFF/0xFFFFFFFF
+	Hardware Version: 1.0
+	Firmware Version: 1.0
+	Time: 15:29:43
+</screen><?Pub Caret 294?></p>    <p>The most important information
+is as follows:<ul>
+<li>The token <parmname>Label</parmname> you assigned at the initialization phase
+							(<codeph>ep11</codeph>, in the example). You can initialize or change a
+						token label by using the <codeph>pkcsconf -I</codeph> command.</li>
+<li>The <parmname>Model</parmname> name is unique and designates the token that is in use. </li>
+<li rev="i2">The <parmname>Flags</parmname> provide information about the token initialization
+						status, the PIN status, and features such as <b><i>Random Number
+								Generator</i></b> (RNG). They also provide information about
+						requirements, such as <b><i>Login required</i></b>, which means that there
+						is at least one mechanism that requires a session log-in to use that
+						cryptographic function. For example, the mask for TOKEN_INITIALIZED is
+						0x00000400 and it is true, if the token has been initialized. <p rev="i4"
+							>The flag USER_PIN_TO_BE_CHANGED indicates that the user PIN must be
+							changed before the token can be used. The flag SO_PIN_TO_BE_CHANGED
+							indicates that the SO PIN must be changed before the token can be
+							used.</p><p rev="i4">For more information about the flags provided in
+							this output, see the description of the TOKEN_INFO structure and the
+							Token Information Flags in the <xref
+								conref="lxce_conref.dita#links/pkcs11_standard_url"/>.</p></li>
+<li>The <parmname>PIN length</parmname> range declared for this token.</li>
+</ul></p>   </section>
+</conbody>
+</concept>
+<?Pub *0000003131?>

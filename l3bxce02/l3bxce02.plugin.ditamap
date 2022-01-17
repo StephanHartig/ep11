@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE plugin PUBLIC "-//IBM//DTD DITA Eclipse Map Collection//EN"
+ "eclipsemap.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<plugin id="com.ibm.linux.z.lxce" xml:lang="en-us">
+<pluginmeta>
+<providerName>IBM</providerName>
+<copyright><copyryear year="2022"/><copyrholder>IBM</copyrholder>
+</copyright>
+<plugininfo><pluginname>Exploiting Enterprise PKCS #11 using openCryptoki 3.17</pluginname>
+<vrmlist>
+<vrm version=""/>
+</vrmlist>
+</plugininfo>
+</pluginmeta>
+<primarytocref format="ditamap" href="lxce_ic.ditamap"/>
+</plugin>
+

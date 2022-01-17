@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE topic
+  PUBLIC "-//IBM//DTD DITA IBM Topic//EN" "ibm-topic.dtd">
+<topic xml:lang="en-us" id="l31xce00_glossary">
+<title>Glossary</title>
+<prolog><metadata><keywords>
+
+<indexterm>glossary</indexterm>
+</keywords>
+</metadata>
+</prolog>
+<body>
+<dl>
+<dlentry>
+<dt>Advanced Encryption Standard (AES)</dt>
+<dd>A data encryption technique that improved upon and officially replaced the Data Encryption
+Standard (DES). AES is sometimes referred to as Rijndael, which is the algorithm on which the
+standard is based.</dd>
+</dlentry>
+<dlentry>
+<dt>asymmetric cryptography</dt>
+<dd>Synonym for public key cryptography..</dd>
+</dlentry>
+<dlentry><dt>Central Processor Assist for Cryptographic Function
+(CPACF)</dt>
+<dd>Hardware that provides support for symmetric ciphers
+and secure hash algorithms (SHA) on every central processor. Hence
+the potential encryption/decryption throughput scales with the number
+of central processors in the system. </dd></dlentry>
+<dlentry><dt>Chinese-Remainder Theorem (CRT)</dt>
+<dd>A mathematical
+problem described by Sun Tsu Suan-Ching using the remainder from a
+division operation.</dd></dlentry>
+<dlentry><dt>Cipher Block Chaining (CBC)</dt>
+<dd>A method of reducing repetitive patterns in cipher-text by performing an exclusive-OR operation
+on each 8-byte block of data with the previously encrypted 8-byte block before it is encrypted. </dd></dlentry>
+<dlentry><dt>Cipher block length</dt>
+<dd>The length of a block
+that can be encrypted or decrypted by a symmetric cipher. Each symmetric
+cipher has a specific cipher block length. </dd></dlentry>
+<dlentry>
+<dt>clear key</dt>
+<dd>Any type of encryption key not protected by encryption under another key.</dd>
+</dlentry>
+<dlentry><dt>CPACF instructions</dt>
+<dd>Instruction set for
+the CPACF hardware.</dd></dlentry>
+<dlentry rev="i1v2">
+<dt>Crypto Express card, Crypto Express adapter (CEX*S)</dt>
+<dd>Beginning with CEX4S, the PCIe adapter on a CEX*S feature can be configured in three ways:
+Either as cryptographic accelerator (CEX*A), or as CCA coprocessor (CEX*C) for secure key encrypted
+transactions, or in <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor mode
+(<keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>) for exploiting <keyword
+id="pkcs11long">Enterprise PKCS #11</keyword> functionality. <p>A <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter only supports secure key mode. </p>
+</dd>
+</dlentry>
+<dlentry rev="i1v2">
+<dt>ECC</dt>
+<dd>See <cite>Elliptic curve cryptography</cite>.</dd>
+</dlentry>
+<dlentry><dt>electronic code book mode (ECB mode)</dt>
+<dd>A method of enciphering and deciphering data in address spaces or data spaces. Each 64-bit block
+of plain-text is separately enciphered and each block of the cipher-text is separately deciphered. </dd></dlentry>
+<dlentry rev="i1v2">
+<dt>Elliptic curve cryptography (ECC)</dt>
+<dd>A public-key process discovered independently in 1985 by Victor Miller (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/>) and Neal Koblitz (University of Washington). ECC is
+based on discrete logarithms. Due to the algebraic structure of elliptic curves over finite fields,
+ECC provides a similar amount of security to that of RSA algorithms, but with relatively shorter key
+sizes.</dd>
+</dlentry>
+<dlentry><dt><keyword conref="lxce_conref.dita#l31xce00_conref/libica"/></dt>
+<dd>Library for <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> Cryptographic
+Architecture.</dd></dlentry>
+<dlentry>
+<dt>master key (MK)</dt>
+<dd>In computer security, the top-level key in a hierarchy of key-encrypting keys.</dd>
+</dlentry>
+<dlentry><dt>Mode of operation</dt>
+<dd>A schema describing how
+to apply a symmetric cipher to encrypt or decrypt a message that is
+longer than the cipher block length. The goal of most modes of operation
+is to keep the security level of the cipher by avoiding the situation
+where blocks that occur more than once will always be translated to
+the same value. Some modes of operations allow handling messages of
+arbitrary lengths.</dd></dlentry>
+<dlentry><dt>modulus-exponent (Mod-Expo)</dt>
+<dd>A type of exponentiation
+performed using a modulus.</dd></dlentry>
+<dlentry>
+<dt>public key cryptography</dt>
+<dd>In computer security, cryptography in which a public key is used for encryption and a private
+key is used for decryption. Synonymous with asymmetric cryptography.</dd>
+</dlentry>
+<dlentry><dt>Rivest-Shamir-Adleman (RSA)</dt>
+<dd>An algorithm
+used in public key cryptography. These are the surnames of the three
+researchers responsible for creating this asymmetric or public/private
+key algorithm.</dd></dlentry>
+<dlentry><dt>Secure Hash Algorithm (SHA)</dt>
+<dd>An encryption
+method in which data is encrypted in a way that is mathematically
+impossible to reverse. Different data can possibly produce the same
+hash value, but there is no way to use the hash value to determine
+the original data.</dd></dlentry>
+<dlentry>
+<dt>secure key</dt>
+<dd>A key that is encrypted under a master key. When using a secure key, it is passed to a
+cryptographic coprocessor where the coprocessor decrypts the key and performs the function. The
+secure key never appears in the clear outside of the cryptographic coprocessor.</dd>
+</dlentry>
+<dlentry><dt>symmetric cryptogrphy</dt>
+<dd>An encryption method that
+uses the same key for encryption and decryption. Keys of symmetric
+ciphers are private keys.</dd></dlentry>
+<dlentry><dt>zcrypt device driver</dt>
+<dd>Kernel device driver to access Crypto Express adapters. Formerly, a monolithic module called
+<cmdname>z90crypt</cmdname>. Today, it consists of multiple modules that are implicitly loaded when
+loading the <cmdname>ap</cmdname> main module of the device driver.</dd></dlentry>
+</dl>
+</body></topic>

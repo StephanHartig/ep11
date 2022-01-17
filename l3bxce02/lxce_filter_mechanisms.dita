@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_filter_mechanisms" xml:lang="en-us">
+<title>Filtering mechanisms</title>
+<!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Filtering mechanisms</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Filtering mechanisms for ACPs and APQNs</searchtitle>
+</titlealts>
+<abstract>
+<shortdesc rev="iv3">You can obtain a filtered list of mechanisms, according to the current setting
+of the access control points (ACPs), while considering different firmware levels on the configured
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/>. That is, if multiple <keyword
+conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/> are assigned in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration file, only the mechanisms
+accessible from the <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/> with the
+lowest firmware level are considered. That way only those mechanisms are returned which you can
+really use.</shortdesc>
+</abstract>
+<prolog>
+<metadata>
+<keywords>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+<indexterm>filtering mechanisms</indexterm></indexterm>
+<indexterm>filtering mechanisms<indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></indexterm></indexterm>
+<indexterm>mechanisms<indexterm>filtering according to access control points</indexterm></indexterm>
+<indexterm>access control points<indexterm>filtering mechanisms</indexterm></indexterm>
+<indexterm>ACPs<indexterm>filtering mechanisms</indexterm></indexterm>
+</keywords>
+</metadata>
+</prolog>
+<conbody>
+<p>An <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/> can be configured by means of
+ACPs, which restrict the use of certain mechanisms within a domain of this coprocessor. Restricted
+mechanisms are not visible in the mechanism list returned. Some ACPs restrict certain attributes of
+mechanisms (such as key sizes). Such restrictions are not reflected in the returned list. </p>
+<p>You can use functions <apiname>C_GetMechanismList</apiname>,
+<apiname>C_GetMechanismInfo</apiname>, as well as the command <cmdname>pkcsconf -m -c n</cmdname> to
+produce a list of accessible mechanisms. Function <apiname>C_GetMechanismInfo</apiname> returns
+<codeph>CKR_MECHANISM_INVALID</codeph> when the examined mechanism is restricted by the current ACP
+settings.</p>
+<p>Since the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> can use multiple
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/> and also multiple domains on a
+coprocessor, the access control points of all <keyword
+conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/> and domains are queried. Ideally, all
+coprocessors and domains should have identical ACP settings. If differences are detected, a message
+is issued to the SYSLOG, and the minimum ACP setting of all coprocessors and domains is used.</p>
+<p rev="iv3">If  multiple <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/> with
+different firmware levels are used, then only the mechanisms allowed by the ACP setting from the
+<keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/> with the lowest firmware level are
+returned.</p>
+<p>When the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration file
+specifies the APQN_ANY keyword, then the <filepath>sysfs</filepath> directories under
+<filepath>/sys/devices/ap/</filepath> are scanned to find all available <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/>. If an APQN_WHITELIST is
+specified, then only those coprocessors specified in the white-list are used.</p>
+<p>The associations of access control points with certain mechanisms are read from the so-called
+<keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/>. This allows to change the
+associations easily, when additional mechanisms or ACPs are added.</p>
+<p>A default <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/> is provided as part of
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. If the <keyword
+conref="lxce_conref.dita#l31xce00_conref/copoficofi"/> is not found or is empty, then no ACP filter
+is applied.</p>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/> that contains the definitions
+for the ACP filter is called <filepath>ep11cpfilter.conf</filepath> per default, and is located at
+the same place as the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration
+files. To choose a different name or location of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/copoficofi"/>, specify the CPFILTER keyword followed by the
+name and path of the <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/> in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration file, for example:</p>
+<codeblock>CPFILTER /etc/opencryptoki/ep11cpfilter.conf</codeblock>
+<p>In the <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/>, each line specifies the
+number of an ACP, followed by a colon and a comma-separated list of mechanisms that are not
+available when this ACP is not set:</p>
+<codeblock>&lt;cp&gt;: &lt;mech1, mech2, ...&gt;</codeblock>
+<p>Both, the ACP number and the mechanisms can be specified as name, in decimal, octal (with leading
+0), or hexadecimal (with leading 0x), for example:</p>
+<codeblock>
+XCP_CPB_SIGN_SYMM: CKM_SHA256_HMAC, CKM_SHA256_HMAC_GENERAL
+4: 0x00000251, 0x00000252</codeblock>
+<p>The shown example filters out the mechanisms CKM_SHA256_HMAC (0x00000251) and
+CKM_SHA256_HMAC_GENERAL (0x00000252) when access control point (ACP) XCP_CPB_SIGN_SYMM (3) or
+XCP_CPB_SIGVERIFY_SYMM (4) is not set. In the first line, both the ACP and the affected mechanisms
+are specified as name, and in the second line, the ACP is specified by a decimal number and the
+mechanisms are identified by their hexadecimal values.</p>
+<p>A list of ACPs can be found in document <xref
+href="http://public.dhe.ibm.com/security/cryptocards/pciecc4/EP11/docs/ep11-structure.pdf"
+format="pdf" scope="external">Enterprise PKCS#11 (EP11) Library structure</xref> (Table 11: Control
+points) that is provided as part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+library.</p>
+<p>Note that you must not change the <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/>
+shipped with <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> unless you are advised to
+do so by <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>.</p>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/copoficofi"/> is read once during token
+initialization (that is, within the <cmdname>C_Initialize</cmdname> function). It is kept in memory
+for the whole lifetime of the token. When changes are made to this configuration file, the token
+must be terminated and initialized again to have it read the file and activate the changes.</p>
+<note>Do not disable access control point 13 (generate or derive symmetric keys including DSA
+parameters), because during token initialization, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> uses mechanism
+<cmdname>CKM_AES_KEY_GEN</cmdname>, which is dependent on this ACP 13.</note>
+</conbody>
+</concept>
+<?Pub *0000008964?>

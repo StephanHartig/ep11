@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_about_this_document" xml:lang="en-us">
+ <title>About this document</title>
+  <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+ <shortdesc rev="i1v2">
+<keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/> applications that are using a <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API can take advantage of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11long" activity=""/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>) coprocessor mode of an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> cryptographic adapter (Crypto Express), starting
+with a CEX4P coprocessor.</shortdesc>
+ <prolog>
+  <metadata>
+   <keywords>
+    <indexterm>about this document</indexterm>
+    <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11long"/></indexterm>
+    <indexterm>coprocessor mode</indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> type</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> instance</indexterm>
+   </keywords>
+  </metadata>
+ </prolog>
+ <body>
+<p><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> is a stack architecture for using a
+library of standard cryptographic functions to write applications on <ph
+conref="lxcommon.dita#phrases/ph_ibmz"/> mainframes with cryptographic hardware. <ph rev="i1v2">In
+this document, the term <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> either stands
+for CEX4P, CEX5P, or CEX6P.</ph></p>
+<p rev="i1v2">This publication describes how to work with the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> type. With the support of multiple token
+instances of a certain token type, this publication uses the term <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> or <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> instance (or just token or token instance) for
+tokens of type <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>.</p>
+<p>You can find the latest version of this document on the <tm tmtype="reg"
+trademark="developerWorks">developerWorks</tm> website at: </p>
+<p><xref conref="lxcommon.dita#links/dev_doc_url"/></p>
+<p>and on the <ph conref="lxcommon.dita#phrases/ph_ikcl"/> at: </p>
+<p><xref conref="lxcommon.dita#links/kc_systemz_lib_url"/></p>
+<?Pub Caret -1?>
+</body>
+</topic>
+<?Pub *0000001711?>

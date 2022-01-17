@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l26xci02main_soc" xml:lang="en-us" rev="i1v2">
+<title>Summary of changes</title>
+<shortdesc>This edition reflects changes to the Development stream for tokens of type <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> to be plugged-in into <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>.</shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>summary of changes</indexterm>
+</keywords>
+</metadata>
+</prolog>
+<?Pub Caret -1?>
+<body>
+<p>You can find the software package of the <ph><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/></ph> at:
+<codeblock><xref href="https://www.ibm.com/security/cryptocards/pciecc4/lonzsoftware" format="html" scope="external"/></codeblock><?Pub Caret 0?></p>
+</body>
+</topic>
+<?Pub *0000000606?>

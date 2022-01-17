@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<reference id="l31xce00_trouble_ep11tokenstatus" xml:lang="en-us">
+<title>Checking the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+        status</title>
+    <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Checking the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+            status</navtitle>
+<searchtitle>Checking the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+            status</searchtitle>
+</titlealts>
+<shortdesc>You can request information about the <keyword
+            conref="lxce_conref.dita#l31xce00_conref/ep11token"/> status by using the
+            <cmdname>pkcsconf -t</cmdname> command. The <term>Flags</term> entry shows the actual
+        status flags for the token and whether the token is ready to be used. In the shown example,
+        the SO PIN needs to be changed before the token can be used.</shortdesc>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+                        status<indexterm>checking</indexterm></indexterm><indexterm>checking <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+                    status</indexterm><indexterm>flags</indexterm><indexterm>status
+flags</indexterm><indexterm>status of  <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"></keyword></indexterm>
+</keywords>
+</metadata></prolog>
+<refbody>
+<section>
+            <screen>$ pkcsconf -t
+
+Token #1 Info:
+    ...                
+	Model: IBM EP11Tok     
+	...
+	Flags: 0x80044D 
+          (RNG|LOGIN_REQUIRED|USER_PIN_INITIALIZED|CLOCK_ON_TOKEN|TOKEN_INITIALIZED
+              |SO_PIN_TO_BE_CHANGED)
+ ...
+ ...
+	Time: 15:29:43
+</screen>
+            <?Pub Caret 234?>
+        </section>
+</refbody>
+</reference>
+<?Pub *0000001904?>

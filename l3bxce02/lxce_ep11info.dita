@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="lxce_ep11info" rev="i1v2" xml:lang="en-us">
+<title>Obtaining information about an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+environment with the <cmdname>ep11info</cmdname> tool</title>
+<titlealts>
+<navtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> information tool:
+ep11info</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>:The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> information tool</searchtitle>
+</titlealts>
+<shortdesc>Use the <cmdname>ep11info</cmdname> tool to obtain general information about  <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/> and about the domains configured on the
+system. Especially the wrapping key identifier of the configured domains are shown. </shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> information tool</indexterm>
+<indexterm>ep11info</indexterm>
+<indexterm>tools<indexterm>ep11info</indexterm></indexterm>
+<indexterm>utilities<indexterm>ep11info</indexterm></indexterm>
+</keywords>
+<?Pub Caret 141?>
+</metadata>
+</prolog>
+<refbody>
+<section>
+<p>The syntax of the <cmdname>ep11info</cmdname> tool is as shown:</p>
+<codeblock>
+ep11info [ -h | --help ] | [ -m &lt;module_nr> | --module &lt;module_nr> ] 
+         [ -d &lt;domain_index> | --domain &lt;domain_index> ]</codeblock>
+<p>If you do not specify any options, all configured domains on all available <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/>  are shown.</p>
+<p>The <cmdname>ep11info</cmdname> tool is included in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> package (RPM or DEB), starting with <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> version 2.0.0.-n. For more information refer to the
+<cmdname>ep11info</cmdname> man page which is also included in the package and which is installed as
+part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>.</p>
+</section>
+</refbody>
+</reference>
+<?Pub *0000003180?>

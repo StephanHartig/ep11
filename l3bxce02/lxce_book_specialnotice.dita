@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_book_specialnotice" xml:lang="en-us">
+<title>Note</title><?Pub Caret -2?>
+<conbody>
+      <p>Before using this document, be sure to read the information in <xref
+            href="lxcommon_notices.dita#lxcommon_notices"/>.</p>
+</conbody>
+</concept>
+<?Pub *0000000483?>

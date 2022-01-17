@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_setting_mk" xml:lang="en-us">
+<title>Setting a master key on the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"
+/></title>
+<!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Setting a master key on the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"
+/></navtitle>
+<searchtitle>Setting a master key on the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></searchtitle>
+</titlealts>
+<shortdesc>To generate a secure and secret master key, use the TKE workstation that is connected to
+the <ph conref="lxcommon.dita#phrases/ph_ibmz"/> mainframe. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>MK <indexterm>setting on the <keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/>
+adapter</indexterm></indexterm>
+<indexterm>master key<indexterm>setting on the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter</indexterm></indexterm>
+<indexterm>wrapping key<indexterm>setting on the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter<indexterm>setting
+the master key</indexterm></indexterm><indexterm>Trusted Key
+Entry (TKE)</indexterm><indexterm>ep11TKEd TKE daemon</indexterm>
+<indexterm>TKE daemon ep11TKEd</indexterm><indexterm>ioctl commands</indexterm>
+<indexterm>secure key</indexterm>
+<indexterm>Trusted Key Entry workstation</indexterm><indexterm>TKE workstation<indexterm>connect with <ph conref="lxcommon.dita#phrases/ph_ibmz"/>
+mainframe</indexterm></indexterm></keywords>
+</metadata></prolog>
+<conbody>
+<section>
+<p>This publication outlines a selection of the basic steps for creating and initializing <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart cards and for generating a master key. It
+does not document the complete process of setting up a comprehensive security concept, nor does it
+demonstrate all security features available from the TKE workstation. For information about
+sophisticated features, for example, for a dual control security policy, for the zone concept, or
+for using TKE domain groups, refer to the <cite>Trusted Key Entry Workstation User's Guide</cite>
+from the <xref href="https://www-304.ibm.com/servers/resourcelink/svc03100.nsf?Opendatabase"
+format="html" scope="external">IBM Resource Link</xref>. </p>
+<note rev="i1v2">The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> master key set on a
+<keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter is referred to as
+<term>wrapping key</term> in document <xref
+href="https://www-03.ibm.com/security/cryptocards/pciecc2/pdf/ep11-structure.pdf" format="pdf"
+scope="external">Enterprise PKCS#11 (EP11) Library structure</xref>.</note>
+<p>Trusted Key Entry (TKE) is a priced optional feature that is used for managing <ph
+conref="lxcommon.dita#phrases/ph_ibmz"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/> in a customer environment.
+<keyword conref="lxce_conref.dita#l31xce00_conref/capital_coprocs"/>  operate with a master key that
+is located inside the coprocessor itself. These coprocessors use keys that are protected by being
+encrypted (wrapped) with the master key. These wrapped keys are called secure keys and are only
+decrypted inside the coprocessor's secure enclosure.</p>
+</section>
+<section>
+<p>Information is provided in the following topics: </p>
+<ul>
+<li><xref href="#l31xce00_setting_mk/l31xce00_setting_tke_enviromnent" format="dita"/></li>
+<li><xref href="#l31xce00_setting_mk/l31xce00_create_initialize_smart_card" format="dita"/></li>
+<li><xref href="#l31xce00_setting_mk/l31xce00_creating_master_key" format="dita"/></li>
+</ul>
+<p>For more information about these tasks, refer to topics <cite>Using the Crypto Module Notebook to
+administer EP11 crypto modules</cite> and <cite>Smart Card Utility Program (SCUP)</cite> in the
+<xref
+href="https://www-01.ibm.com/servers/resourcelink/svc00100.nsf/pages/zOSV2R3sc147511/$file/csfb600_tke_9_1.pdf"
+format="html" scope="external"><cite>z/OS Cryptographic Services ICSF Trusted Key Entry
+Workstation</cite></xref>.</p>
+</section>
+<section id="l31xce00_setting_tke_enviromnent">
+<title>Setting up the TKE environment</title>
+<p>For a <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>, a TKE workstation is
+required to perform certain key management functions. </p>
+<p> A TKE version 7.3 is required to detect <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/> adapters and set and manage wrapping keys (master keys) correctly.</p>
+<note>For any master key transactions to the card (key generation or import) and for
+initialization/personalization purposes, you need at least two smart card readers. Furthermore, the
+described outline uses one CA (Certificate Authority) smart card and two smart cards that hold two
+separate key parts which make up the master key. The smart cards can be initialized from scratch by
+using the TKE interfaces. </note>
+<p>To use the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> functions of the TKE, the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> library (<term>libep11.so</term>) and the
+TKE daemon (<term>ep11TKEd</term>) must be installed. <ph rev="i1v2">The <term>ep11TKEd</term>
+daemon is used for receiving messages from a Trusted Key Entry workstation and for routing those
+messages to the specified <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> card).</ph></p>
+<p>To start the daemon, use the command
+<codeblock><cmdname>service ep11TKEd start</cmdname></codeblock>This command is redirected and
+performs the same processing as the command
+<codeblock><cmdname>systemctl start ep11TKEd.service</cmdname></codeblock></p>
+<p rev="i1v2">The <term>ep11TKEd</term> TKE daemon uses the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> host library to communicate with a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallpshort"/> and is listening on port 50004 for
+administrative TKE commands. These commands are translated into <cmdname>ioctl</cmdname> commands to
+talk to the <keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver. </p>
+</section>
+<section id="l31xce00_create_initialize_smart_card"><title>Create and initialize an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card</title><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card</indexterm><indexterm>creating an
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card</indexterm><indexterm>smart
+card<indexterm>creating</indexterm><indexterm>initializing</indexterm></indexterm>
+<p><uicontrol>Step 1</uicontrol></p><p>As a prerequisite, you need a valid CA (Certificate
+Authority) smart card to be authorized to create <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart cards (see <uicontrol>Step
+4</uicontrol>).</p><p>The <uicontrol>Trusted Key Entry</uicontrol> console automatically loads on
+start-up with a set of commonly used tasks. After the TKE console started, the initial
+<uicontrol>Trusted Key Entry Console</uicontrol> window appears. </p><p>This initial window provides
+access to applications and utilities available on the TKE workstation. </p><fig expanse="page" id="f_create_smartcard_1">
+<title>TKE Console - initial window</title>
+<image href="lxce_01_trusted_key_entry_console.jpg" placement="break" width="650">
+<alt>TKE Console - initial window</alt>
+</image>
+</fig><p><uicontrol>Step 2</uicontrol></p><p>Click the <uicontrol>Smart Card Utility
+Program</uicontrol> application as shown in <xref format="dita"
+href="#l31xce00_setting_mk/f_create_smartcard_1"/>. </p><p>When you open a TKE application or
+utility, you must sign on with a profile that is on the TKE workstation crypto adapter. Therefore,
+depending on how you have initialized your environment, the <uicontrol>Crypto Adapter
+Logon</uicontrol> window is displayed with profile IDs that represent a single or group passphrase
+logon. The individual or group profile you choose must have enough authority to do the functions
+that are performed by the application or utility. The steps described here use the default TKEADM
+user name. </p><fig expanse="column" id="f_create_smartcard_2">
+<title>Crypto Adapter Logon</title>
+<image href="lxce_02_crypto_adapter_login.jpg" placement="break" width="450">
+<alt>Crypto Adapter Logon</alt>
+</image>
+</fig><p><uicontrol>Step 3</uicontrol></p><p>After a successful log-on, the <uicontrol>Smart Card
+Utility Program</uicontrol> opens and shows a table for each smart card reader for all detected
+plugged-in smart card types. The tables are still empty at this point in time, because the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card is not yet created. The missing
+information is provided during the process of initializing and personalizing the smart card as
+described in the remainder of this topic.</p><p>To continue, select <uicontrol>Initialize and enroll
+EP11 smart card</uicontrol> from the <uicontrol>EP11 Smart Card</uicontrol> pulldown choice.</p><fig expanse="page" id="f_create_smartcard_4" rev="i1v2">
+<title>Initialize and enroll EP11 smart card</title>
+<image href="lxce_04_ep11_smart_card_initialize.jpg" placement="break" width="650">
+<alt>Initialize and enroll EP11 smart card</alt>
+</image>
+</fig><p><uicontrol>Step 4</uicontrol></p><p>The <uicontrol>Smart Card Utility Program</uicontrol>
+prompts you to insert the CA smart card into the smart card reader 1 and then press the
+<uicontrol>OK</uicontrol> button. For detailed information, read the TKE documentation.</p><fig expanse="column" id="f_create_smartcard_5">
+<title>Insert CA smart card</title>
+<image href="lxce_05_insert_ca_smart_card.jpg" placement="break" width="400">
+<alt>Initialize and enroll EP11 smart card - Insert CA smart card</alt>
+</image>
+</fig><p><uicontrol>Step 5</uicontrol></p><p>As next step, the <uicontrol>Smart Card Utility
+Program</uicontrol> prompts you to insert a smart card to be initialized as an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card into smart card reader 2 and then press
+the <uicontrol>OK</uicontrol> button.</p><fig expanse="column" id="f_create_smartcard_6">
+<title>Insert smart card to be initialized as an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card</title>
+<image href="lxce_06_insert_ep11_smart_card.jpg" placement="break" width="400">
+<alt>Insert smart card to be initialized as an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart cardTKE Console - initial window</alt>
+</image>
+</fig><p><uicontrol>Step 6</uicontrol></p><p>The <uicontrol>Smart Card Utility Program</uicontrol>
+initializes and builds the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card and
+displays a message when the creation was successful. <ph rev="i1v2">This may take some time. When
+the processing is finished, you see the new EP11 card information in an updated view from <xref
+href="#l31xce00_setting_mk/f_create_smartcard_4" format="dita"/> (lower part) as shown in <xref
+href="#l31xce00_setting_mk/f_create_smartcard_7" format="dita"/>.</ph></p><fig expanse="page" id="f_create_smartcard_7">
+<title><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card successfully
+created</title>
+<image href="lxce_07_successful_initialized.jpg" placement="break" width="650">
+<alt><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card successfully created</alt>
+</image>
+</fig><p><uicontrol>Step 7</uicontrol></p><p>The <uicontrol>Smart Card Utility Program</uicontrol>
+now goes back to the window shown in <xref format="dita"
+href="#l31xce00_setting_mk/f_create_smartcard_4"/>, where you now select item <uicontrol>Personalize
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card</uicontrol> from the
+<uicontrol><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> Smart Card</uicontrol>
+pull-down choice.</p><p>To personalize the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+smart card, the <uicontrol>Smart Card Utility Program</uicontrol> prompts you to enter a PIN to be
+used for this smart card on the smart card reader PIN pad. The PIN must be entered twice for
+confirmation.</p><p rev="i1v2">The TKE also prompts you for an optional description for the smart
+card.</p><fig expanse="column" id="f_create_smartcard_9">
+<title>Entering a PIN for the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart
+card</title>
+<image href="lxce_09_enter_new_pin.jpg" placement="break" width="400">
+<alt>Entering a PIN for the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart
+card</alt>
+</image>
+</fig><p>The <uicontrol>Smart Card Utility Program</uicontrol> informs you of a successful
+personalization of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card. This
+smart card now contains a certificate signed by the CA authority, and a PIN to access the smart
+card. </p><fig expanse="column" id="f_create_smartcard_10">
+<title><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card successfully
+personalized</title>
+<image href="lxce_10_successful_personalized.jpg" placement="break" width="400">
+<alt><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card successfully
+personalized</alt>
+</image>
+<?Pub Caret 40?>
+</fig><p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card is needed whenever
+you want to set a new master key on the adapter.</p><p><uicontrol>Step 8</uicontrol></p><p>Repeat
+<uicontrol>Step 3</uicontrol> through <uicontrol>Step 7</uicontrol> to create the second <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card.</p></section>
+<section id="l31xce00_creating_master_key">
+<title>Creating a master key on the TKE workstation</title>
+<p>Read an outline of the required steps for creating a master key and installing it on the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter. For detailed information about how to
+use the TKE workstation, refer to <xref
+href="https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.csfb600/toc.htm"
+format="html" scope="external"><cite rev="i1v2">z/OS Cryptographic Services ICSF Trusted Key Entry
+Workstation User's Guide</cite></xref>. </p><p><uicontrol>Step 1</uicontrol></p>Go to the
+<uicontrol>Trusted Key Entry</uicontrol> console as described in Step 1 of <xref format="dita"
+href="#l31xce00_setting_mk/l31xce00_create_initialize_smart_card"/>.<fig expanse="page" id="f_masterkey_tke2" rev="i1v2">
+<title>TKE Console - initial window</title>
+<image href="lxce_02_trusted_key_entry_console.jpg" placement="break" width="650">
+<alt>TKE Console - initial window</alt>
+</image>
+</fig>
+<p><uicontrol>Step 2</uicontrol></p>
+<p>Click the <uicontrol>Trusted Key Entry</uicontrol> application as shown in <xref format="dita"
+href="#l31xce00_setting_mk/f_masterkey_tke2"/>. Then proceed with the logon procedure as described
+in Step 2 of <xref format="dita" href="#l31xce00_setting_mk/l31xce00_create_initialize_smart_card"
+/>.</p>
+<p><uicontrol>Step 3</uicontrol></p>
+<p>Select the default profile ID TKEUSER, click <uicontrol>OK</uicontrol>, and in the upcoming
+<uicontrol>Passphrae Logon</uicontrol> dialog for this profile, logon with the passphrase associated
+to TKEUSER.</p>
+<p><uicontrol>Step 4</uicontrol></p>
+<p>The <uicontrol>Trusted Key Entry</uicontrol> main window is displayed (<xref format="dita"
+href="#l31xce00_setting_mk/f_masterkey_tke6"/>). Open the context menu for hosts and select action
+<uicontrol>Create Host</uicontrol>.</p><fig expanse="page" id="f_masterkey_tke6">
+<title>Trusted Key Entry - main window</title>
+<image href="lxce_06_create_host.jpg" placement="break" width="650">
+<alt>Trusted Key Entry - main window</alt>
+</image>
+</fig>
+<p><uicontrol>Step 5</uicontrol></p>
+<p>In the <uicontrol>Create New Host</uicontrol> dialog, enter the required values of the host for
+which you want to create the master key. It is assumed that this host is a <keyword
+conref="lxce_conref.dita#l31xce00_conref/linuxonz"/> system running the
+<filepath>ep11TKEd</filepath> TKE daemon. Press <uicontrol>OK</uicontrol> to return to the
+<uicontrol>Trusted Key Entry</uicontrol> main window.</p><fig expanse="column" id="f_masterkey_tke7">
+<title>TKE - Create new Host</title>
+<image href="lxce_07_create_host_parameter.jpg" placement="break" width="500">
+<alt>TKE - Create New Host dialog</alt>
+</image>
+</fig>
+<p><uicontrol>Step 6</uicontrol></p>
+<p>The new host is visible now within the list of host IDs.</p><p> Before you continue to work on
+the new host, ensure the following:</p><ul>
+<li>The <filepath>ep11TKEd</filepath> TKE daemon is started on the host.</li>
+<li>The TKE has connectivity to the host.</li>
+</ul><p>Then open the new host's context menu and select action <uicontrol>Open
+Host</uicontrol>.</p><fig expanse="page" id="f_masterkey_tke8">
+<title>Trusted Key Entry - main window with new created host</title>
+<image href="lxce_08_open_host.jpg" placement="break" width="650">
+<alt>Trusted Key Entry - main window with new created host</alt>
+</image>
+</fig>
+<p><uicontrol>Step 7</uicontrol></p><p rev="i1v2">If you accepted the default settings when
+installing and configuring the <filepath>ep11TKEd</filepath> TKE daemon as recommended, you are
+prompted by the TKE workstation to log on to the selected host with the appropriate <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> user credentials. Do not forget to activate the
+<uicontrol>Enable Mixed Case Passwords</uicontrol> check box (see <xref
+href="#l31xce00_setting_mk/f_masterkey_tke9" format="dita"/>). This user must be a member in the
+<term>ep11tke group</term> defined in <filepath>/etc/group</filepath> of the system.</p><fig
+expanse="column" id="f_masterkey_tke9">
+<title>Log on to new host</title>
+<image height="250" href="lxce_09_logon_to_host.jpg" placement="break" width="400">
+<alt>Log on to new host</alt>
+</image>
+</fig><p rev="i1v2">If you specified <codeph>CipherMode=None</codeph> in the TKE daemon
+configuration file <filepath>/etc/ep11/ep11tked.conf</filepath>, the values that you enter as the
+user ID and password are not relevant, because they are not validated. You just need to press the
+<uicontrol>OK</uicontrol> button.</p><p rev="i1v2">For details about configuring the
+<filepath>ep11TKEd</filepath> TKE daemon, read <xref
+href="lxce_installing_hostpart.dita#l31xce00_installing_hostpart"/> or refer to file
+<filepath>README_TKED.md</filepath> coming with the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> installation package.</p><p><uicontrol>Step
+8</uicontrol></p><p>The TKE now requests a verification of any new crypto adapter. Press the
+<uicontrol>Yes</uicontrol> button to continue.</p><fig expanse="column">
+<title>Authenticate crypto module</title>
+<image height="350" href="lxce_cryptocard_detection_after_first_connection.jpg" placement="break"
+width="600">
+<alt>Authenticate crypto module</alt>
+</image>
+</fig>
+<p><uicontrol>Step 9</uicontrol></p>
+<p>The <uicontrol>Crypto Modules</uicontrol> list now displays the available adapters. In the sample
+from <xref format="dita" href="#l31xce00_setting_mk/f_masterkey_tke11"/>, there is just one adapter
+available with host ID <term>p2314002</term>. Select a crypto adapter of your choice and trigger
+action <uicontrol>Open Crypto Module</uicontrol> from its context menu.</p><fig expanse="page" id="f_masterkey_tke11">
+<title>Crypto Modules list</title>
+<image href="lxce_10_crypto_modules.jpg" placement="break" width="650">
+<alt>Crypto Modules list</alt>
+</image>
+</fig>
+<p><uicontrol>Step 10</uicontrol></p><p>The <uicontrol>Crypto Module Administration</uicontrol>
+window for the selected crypto adapter opens. Now you can start to configure the domains. Click on
+the <uicontrol>Domains</uicontrol> tab at the top. On the right side, the window now shows an
+<uicontrol>Index</uicontrol> tab for each available domain. Choose one of these indexes and select
+the <uicontrol>Domain Administrators</uicontrol> tab at the bottom of the window to add a new
+administrator role. In this documentation, the configuration is outlined for the domain with index
+<term>13</term>. For detailed information on domain configuration, refer to the TKE
+documentation.</p><p><uicontrol>Step 11</uicontrol></p><p>Now create a user ID with administrator
+role in the <uicontrol>Crypto Module Administration</uicontrol> window for the selected crypto
+adapter. Open the context menu by right-clicking into the white space of the window. Select action
+<uicontrol>Add Administrator</uicontrol>. </p>
+<fig expanse="page" id="f_masterkey_tke13">
+<title>Crypto Module Administration - with context menu</title>
+<image href="lxce_12_add_domain_administrators.jpg" placement="break" width="650">
+<alt>Crypto Module Administrator - with context menu</alt>
+</image>
+</fig><p>From the opening <uicontrol>Select Source</uicontrol> window, TKE requests certain
+information from the previously CA prepared smart card that contains the administrator key and
+certificate.</p><fig expanse="column" id="f_masterkey_tke14">
+<title>Select Source</title>
+<image href="lxce_13_smart_card_reader_mask.jpg" placement="break" width="350">
+<alt>Select Source</alt>
+</image>
+</fig><p>After a successful authentication on the smart card reader, the TKE workstation imports the
+administrator key and certificate and creates an administrator profile.</p>
+<fig expanse="page" id="f_masterkey_tke17">
+<title>Crypto Module Administration - Subject Key Identifier</title>
+<image href="lxce_16_administrator_role_created.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Subject Key Identifier</alt>
+</image>
+</fig>
+<p><uicontrol>Step 12</uicontrol></p>
+<p>Now select the <uicontrol>Domain Attributes</uicontrol> tab at the bottom of the window. This
+selection opens the window that is shown in <xref format="dita"
+href="#l31xce00_setting_mk/f_masterkey_tke19"/> where you can specify the required permissions and
+attribute controls for the current domain. </p><p>Per default, the <term>Signature Threshold</term>
+and the <term>Revocation Signature Threshold</term> are set to 0. Both values must be changed at
+least to 1 to release the card from the IMPRINT mode. For more information, see the TKE
+documentation. Press <uicontrol>Send updates</uicontrol> to apply your settings. </p>
+<fig expanse="page" id="f_masterkey_tke19">
+<title>Crypto Module Administration - Setting permissions and attribute controls</title>
+<image href="lxce_17_domain_attributes_imprint_mode.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Setting permissions and attribute controls</alt>
+</image>
+</fig>
+<p><uicontrol>Step 13</uicontrol></p>
+<p>Now select the <uicontrol>Domain Keys</uicontrol> tab from the bottom of the <uicontrol>Crypto
+Module Administration</uicontrol> window.</p><p>The new <uicontrol>Crypto Module
+Administration</uicontrol> window with verification patterns for the new and current master key is
+displayed. The patterns are all set to 0, because the current and new master keys are empty yet.
+</p><p>Open the context menu by right-clicking in the white space, and select action
+<uicontrol>Generate key part</uicontrol>.</p><fig expanse="page" id="f_masterkey_tke21">
+<title>Crypto Module Administration - Generate key part</title>
+<image href="lxce_18_generate_key_part.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Generate key part</alt>
+</image>
+</fig>
+<p><uicontrol>Step 14</uicontrol></p>
+<p>The TKE workstation now prompts you to enter the total number of key parts to be generated. You
+must at least generate two parts. Enter your input and press the <uicontrol>OK</uicontrol>
+button.</p><fig expanse="column" id="f_masterkey_tke22">
+<title>Crypto Module Administration - Input for total number of key parts to be generated</title>
+<image href="lxce_19_number_of_key_parts_2.jpg" placement="break" width="400">
+<alt>Crypto Module Administration - Input for total number of key parts to be generated</alt>
+</image>
+</fig>
+<p><uicontrol>Step 15</uicontrol></p>
+<p>In a similar way as in the previous step, you are now prompted to insert an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> smart card and to enter a name and description for
+each generated key part. The TKE workstation informs you about a successful storage of all generated
+key parts and descriptions. The new master key can now be generated by the TKE component.</p>
+<p><uicontrol>Step 16</uicontrol></p><p rev="i2">During the current process, the new master key now
+needs to go through three stages:</p><dl>
+<dlentry>
+<dt>Load</dt>
+<dd>The key is just stored on the adapter, but not active.</dd>
+</dlentry>
+<dlentry>
+<dt>Commit</dt>
+<dd>The key is activated and is now present on the adapter as the new master key. In this state, the
+existing objects encrypted under the current master key can be re-encrypted by using this new master
+key.</dd>
+</dlentry>
+<dlentry>
+<dt>Set</dt>
+<dd>The new master key is now switched to become the current key to be used.</dd>
+</dlentry>
+</dl>
+<p>Start with the <uicontrol>Load</uicontrol> step: Load the new generated master key parts from the
+cards to the target crypto adapter. For this purpose, open the context menu from the
+<uicontrol>Crypto Module Administration</uicontrol> window and select action <uicontrol>Load new
+master key</uicontrol>. TKE now prompts you for the total number of key parts to be loaded. Type the
+number of previously generated key parts. TKE then prompts you to load each key part separately.
+</p><fig expanse="page" id="f_masterkey_tke25">
+<title>Crypto Module Administration - Load new master key</title>
+<image href="lxce_20_load_master_key.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Load new master key</alt>
+</image>
+</fig><p>The TKE workstation opens the window <uicontrol>Select key part from smart card</uicontrol>
+as shown in <xref format="dita" href="#l31xce00_setting_mk/f_masterkey_tke28"/>. From this window,
+you can commit the single parts of your key. From the list of shown key parts, select that part that
+you now want to commit and press <uicontrol>OK</uicontrol>.</p>
+<fig expanse="page" id="f_masterkey_tke28">
+<title>Select key part from smart card</title>
+<image href="lxce_21_select_predefined_key_part1.jpg" placement="break" width="650">
+<alt>Select key part from smart card</alt>
+</image>
+</fig>
+<p><uicontrol>Step 17</uicontrol></p><p>After you loaded all single master key parts, the complete
+master key is successfully loaded onto the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter. </p><p>The TKE workstation switches
+back to the <uicontrol>Crypto Module Administration</uicontrol> window. You can see that the new
+master key is full/complete, but yet uncommitted. To commit the new master key, invoke the context
+menu and select action <uicontrol>Commit new master key</uicontrol>. The status switches to
+<term>Full Committed</term>, as shown in <xref format="dita"
+href="#l31xce00_setting_mk/f_masterkey_tke31"/>.</p><fig expanse="page" id="f_masterkey_tke30">
+<title>Crypto Module Administration - Commit new master key</title>
+<image href="lxce_22_commit_master_key.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Commit new master key</alt>
+</image>
+</fig>
+<p><uicontrol>Step 18</uicontrol></p><p>You can now immediately set the new master key. From the
+context menu, start action <uicontrol>Set, immediate</uicontrol>.</p><fig expanse="page" id="f_masterkey_tke31">
+<title>Crypto Module Administration - Set, immediate</title>
+<image href="lxce_23_set_immediate_master_key.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - Set, immediate</alt>
+</image>
+</fig>
+<p>Before you actually perform the action, the TKE comes up with a warning. If this is the first
+time you generated a master key, or if there are no keys stored on your host that are wrapped by the
+current master key, you can ignore the warning by pressing the <uicontrol>OK</uicontrol>
+button.</p><p>If there are keys wrapped by the current master key on your host, then you should not
+generate a new master key, but follow the procedure described in <xref
+href="lxce_managing_mkeys.dita#l31xce00_managing_mkeys"/>.</p><fig expanse="column">
+<title>Warning before setting the master key</title>
+<image href="lxce_icsf_warning_after_set_immediate.jpg" placement="break" width="600">
+<alt>Warning before setting the master key</alt>
+</image>
+</fig><p>See the result in <xref format="dita" href="#l31xce00_setting_mk/f_masterkey_tke32"/>: The
+new master key is now switched to the <term>Current Master Key</term>, and its status is
+<term>Valid</term>. </p><fig expanse="page" id="f_masterkey_tke32">
+<title>Crypto Module Administration - valid current master key</title>
+<image href="lxce_24_master_key_successful_activated.jpg" placement="break" width="650">
+<alt>Crypto Module Administration - valid current master key</alt>
+</image>
+</fig><p>If you need to change the master key, see <xref
+href="lxce_managing_mkeys.dita#l31xce00_managing_mkeys"/>.</p>
+</section>
+</conbody>
+</concept>
+<?Pub *0000028271?>

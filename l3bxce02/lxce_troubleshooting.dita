@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_troubleshooting" xml:lang="en-us">
+<title>Troubleshooting <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword></title>
+<!--SH: Acrolinx run on Apr. 11, 2014, shows no flags-->
+<titlealts>
+<navtitle>Troubleshooting <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword></navtitle>
+<searchtitle>Troubleshooting <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword></searchtitle><?Pub
+Caret 0?>
+</titlealts>
+<shortdesc> Troubleshooting can provide helpful information,  if problems occur while you work with
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword><indexterm>troubleshooting</indexterm></indexterm>
+<indexterm>troubleshooting <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword></indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<p>The contained subtopics introduce different methods, which support troubleshooting:</p>
+<ul otherprops="pdf">
+<li><xref href="lxce_trouble_ddstatus.dita#l31xce00_trouble_ddstatus"></xref></li>
+<li><xref
+href="lxce_trouble_ep11tokenstatus.dita#l31xce00_trouble_ep11tokenstatus"></xref></li>
+<li><xref
+href="lxce_trouble_ep11tokenlogging.dita#l31xce00_trouble_ep11tokenlogging"></xref></li>
+</ul>
+</conbody>
+</concept>
+<?Pub *0000001547?>

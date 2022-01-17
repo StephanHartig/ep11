@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_audience" xml:lang="en-us">
+<title>Who should read this <ph otherprops="pdf">document</ph><ph
+otherprops="NOTpdf">information</ph></title>
+<shortdesc>This <ph otherprops="pdf">document</ph><ph otherprops="NOTpdf">information</ph> is
+intended for C programmers who want to access <keyword
+conref="lxce_conref.dita#l31xce00_conref/ph_ibmz"/> hardware support for cryptographic methods. It
+is also intended for system administrators who need to enable and configure the required
+cryptographic hardware.</shortdesc><?Pub
+Caret 16?>
+<prolog><metadata>
+<keywords><indexterm>who should read this document</indexterm>
+</keywords>
+</metadata></prolog>
+<body>
+<p rev="i2">Furthermore, this publication addresses users who want to enhance their existing
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> applications with the new features
+of <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11long"/>.</p>
+</body>
+</topic>
+<?Pub *0000001272?>

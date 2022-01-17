@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="lxce_terms" xml:lang="en-us">
+<title>Terminology</title>
+<titlealts>
+<navtitle>Terminology</navtitle>
+<searchtitle/>
+</titlealts>
+<shortdesc>The following terms for <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"
+/> are used in this document: </shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>CEX4P</indexterm>
+<indexterm>CEX5P</indexterm>
+<indexterm>CEX6P</indexterm>
+<indexterm>CEX7P</indexterm>
+<indexterm>terminology</indexterm>
+<indexterm>Crypto Express4 feature</indexterm>
+<indexterm>Crypto Express5 feature</indexterm>
+<indexterm>Crypto Express6 feature</indexterm>
+<indexterm>Crypto Express7 feature</indexterm>
+</keywords>
+</metadata>
+</prolog>
+<refbody>
+<section>
+<dl>
+<dlentry>
+<dt>CEX4P</dt>
+<dd>An <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> 4765 Crypto Express4 feature
+(CEX4S), configured in <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor
+mode.</dd>
+</dlentry>
+<dlentry>
+<dt>CEX5P</dt>
+<dd>An <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> 4767 Crypto Express5 feature
+(CEX5S), configured in <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor
+mode.</dd>
+</dlentry>
+<dlentry>
+<dt>CEX6P</dt>
+<dd>An <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> 4768 Crypto Express6 feature
+(CEX6S), configured in <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor
+mode.</dd>
+</dlentry>
+<dlentry rev="iv3">
+<dt>CEX7P</dt>
+<dd>An <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> 4769 Crypto Express7 feature
+(CEX7S), configured in <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor
+mode.</dd>
+</dlentry>
+<dlentry>
+<dt>CEX*P</dt>
+<dd rev="iv3">Designates either one or more or all of CEX4P, CEX5P, CEX6P, or CEX7P. Also, CEX*S
+designates one or more or all of CEX4S, CEX5S, CEX6S, or CEX7S.</dd>
+</dlentry>
+</dl>
+</section>
+</refbody>
+</reference>
+<?Pub *0000001635?>

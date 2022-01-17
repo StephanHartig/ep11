@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="l31xce00_examples" rev="i3" xml:lang="en-us">
+<title>Programming examples for  <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword></title>
+<titlealts>
+<navtitle>Programming examples for <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"
+/></navtitle>
+<searchtitle>Programming examples for the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> functions</searchtitle>
+</titlealts>
+<shortdesc>The provided program segments in C illustrate some <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> sample APIs to be used for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>samples</indexterm>
+<indexterm>programming samples</indexterm><indexterm>examples for programming</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"></keyword>
+           functions<indexterm>programming samples</indexterm></indexterm>
+<indexterm>dynamic library calls</indexterm><indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword>
+         <indexterm>programming samples </indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword><indexterm>dynamic
+library calls</indexterm></indexterm></keywords><?Pub Caret 141?>
+</metadata></prolog>
+<refbody>
+<section>       <p>The contained <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> code
+samples provide an insight into how to deal with the openCryptoki API's. After describing some basic
+functions such as initialization, session and log-in handling, the samples provide an introduction
+about how to create key objects and process symmetric encryption/decryption (AES). The last section
+shows RSA key generation with RSA encrypt and decrypt operations.</p>     </section>
+<section>       <p>To develop an application that uses the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword> library,
+you need to access the         library. You achieve the loading of
+shared objects by using dynamic library calls (dlopen)         as
+described in the sample provided in <xref
+href="lxce_linklib_base_samples.dita#l31xce00_linklib_base_samples"></xref>.</p>
+   </section>
+<section>       <p>At compile time, you need to specify the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+library:<codeblock scale="90">gcc test_ock.c -g -O0 -o test_ock -lopencryptoki -ldl
+-I /usr/include/opencryptoki/</codeblock>The
+exact location of the include files depends on your Linux distribution.</p>
+   </section>
+<section>       <p>The following sample categories are provided:</p>
+     <ul>
+<li>Base procedures</li>
+<li>Session and log-in</li>
+<li>Object handling</li>
+<li>Cryptographic operations</li>
+</ul>     </section>
+</refbody>
+</reference>
+<?Pub *0000003180?>

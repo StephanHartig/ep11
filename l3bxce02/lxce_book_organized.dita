@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_book_organized" xml:lang="en-us">
+<title>How this document is organized</title>
+<!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<shortdesc>The information is divided into topics that describe installing, configuring, and using
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>.</shortdesc><?Pub
+Caret 0?>
+<prolog><metadata>
+<keywords></keywords>
+</metadata></prolog>
+<body>
+<p><xref href="lxce_intro.dita#l31xce00_intro"></xref> contains
+general information about the     <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat"></keyword>.</p>
+<p><xref href="lxce_stack.dita#l31xce00_stack"></xref> describes
+how the components of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat"></keyword> are
+positioned within the different    layers between applications and
+hardware.</p>
+<p><xref href="lxce_building_stack.dita#l31xce00_building_stack"></xref> describes
+how to prepare or    install the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> components
+within the    stack.</p>
+<p><xref
+href="lxce_configuring_ocryptoki_ep11tok.dita#l31xce00_configuring_ocryptoki_ep11tok"></xref> 
+  describes the configuration and customization tasks for enabling
+the exploitation of the EP11    library functions from applications.</p>
+<p><xref href="lxce_using_ep11_token.dita#l31xce00_using_ep11_token"></xref> describes
+the APIs for          invoking the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"></keyword> 
+        functions.</p>
+<p>
+<xref href="lxce_troubleshooting.dita#l31xce00_troubleshooting"/> provides information how to
+resolve problems when using the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>.</p>
+<p><xref href="lxce_tools.dita#lxce_tools"/> documents various tools and utilities which provide
+general information about <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>, which support
+you in migrating <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> master keys, and which
+help you to manage <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> sessions.</p>
+<p><xref href="lxce_examples.dita#l31xce00_examples"></xref> is
+a set of programming samples that use    the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"></keyword>.</p>
+</body>
+</topic>
+<?Pub *0000002485?>

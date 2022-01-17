@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_whatis_ep11_cex4p" xml:lang="en-us">
+<title>What is a <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> ?</title>
+<!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>What is a <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>?</navtitle>
+<searchtitle>What is a <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"
+/>?</searchtitle>
+</titlealts>
+<shortdesc>An <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> Crypto Express adapter, which
+is configured with the Enterprise <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>
+(<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>) firmware, is called a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> (shortly referred to as <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>). The Crypto Express4 adapter is the first
+adapter that can be configured as an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+coprocessor (<keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/>). <ph rev="i1v2">You can
+also use CEX5Ps or CEX6Ps on the appropriate <keyword
+conref="lxce_conref.dita#l31xce00_conref/ph_ibmz"/> systems.</ph></shortdesc><?Pub
+Caret 98?>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/> adapter</indexterm>
+<indexterm>Crypto Express (CEX*S) adapter</indexterm><indexterm>Enterprise <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>)</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware</indexterm><indexterm>firmware <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/></indexterm></indexterm>
+<indexterm>HSM</indexterm><indexterm>hardware security module (HSM)</indexterm>
+<indexterm>secure key</indexterm><indexterm>clear key</indexterm>
+<indexterm>master key</indexterm>
+<indexterm>wrapping key</indexterm>
+<indexterm>encrypt</indexterm><indexterm>decrypt</indexterm><indexterm>unwrap</indexterm>
+<indexterm>wrap</indexterm></keywords>
+</metadata></prolog>
+<conbody>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapters provide
+hardware-accelerated support for crypto operations that are based on the <xref
+conref="lxce_conref.dita#links/pkcs11_standard_url"/>. Access from applications to the functions of
+a <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter is enabled through the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"/>. This <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11stack"/> consists of certain <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> user space libraries and an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> extension in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> AP device driver. Using several layers of
+interfaces, the <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> standard requests are
+propagated to and returned from the <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>
+adapter by the device driver.</p>
+<p>A <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter is a <term>hardware
+security module (HSM)</term> that maintains and protects secrets (for example, master keys) such
+that these secrets cannot be revealed from outside the adapter: No operating system service or
+application can retrieve these secrets and any trial to physically break into the card destroys its
+data due to its tamper proof design.</p>
+<p>A <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter supports cryptographic
+operations with secure keys. A <term>secure key</term> is a key that is encrypted (wrapped) by a
+master key that is stored in the adapter. <ph rev="i1v2">So sometimes, a master key is also referred
+to with the more general term <term>wrapping key</term>, as for example in document <xref
+href="https://www-03.ibm.com/security/cryptocards/pciecc2/pdf/ep11-structure.pdf" format="pdf"
+scope="external">Enterprise PKCS#11 (EP11) Library structure</xref>. </ph></p>
+<p>Therefore, on the <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter,
+applications can decrypt (unwrap) a secure key and use it for cryptographic operations inside the
+adapter. Outside the adapter (for example, inside an operating system), a secure key is only
+available as a binary large object (blob) wrapped by the master key, and cannot be used for
+cryptographic operations. To use a secure key, an application must call functions on the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter. It is therefore safe to keep a secure
+key in memory or to store it in a file system.</p>
+<p>Cryptographic keys that are not encrypted are called <term>clear keys</term>. If a clear key is
+stored in memory or in a file, unauthorized access to that memory or file must carefully be
+prevented. Otherwise, the key can be stolen and used to decrypt protected information. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapters do not support clear key
+cryptography.</p>
+<p><ph rev="i1v2">The maximum number of supported domains depends on the mainframe model and is the
+same for all <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplongs"/> in that mainframe.
+For example, an <ph conref="lxcommon.dita#phrases/ph_ibmz14"/> (<ph
+conref="lxcommon.dita#phrases/ph_z14"/>) supports up to 85 domains (with hexadecimal domain IDs 0000
+to 0054).</ph> Each domain acts like an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+coprocessor, but maintains its own master key. That means, that the master key of one domain cannot
+be accessed by another domain. Different domains of a crypto adapter may be assigned to different
+LPARs or <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guests, such that multiple LPARs
+or guests can share one <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> without
+sharing their master keys. </p>
+</conbody>
+</concept>
+<?Pub *0000004908?>

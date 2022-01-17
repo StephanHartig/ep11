@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="l31xce00_setting_envorinment_variables" xml:lang="en-us">
+<title>Setting environment variables</title>
+<titlealts>
+<navtitle>Setting environment variables</navtitle>
+<searchtitle>Setting environment variables</searchtitle>
+</titlealts>
+<shortdesc>To customize your <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/>,
+you can set environment variables. Setting environment variables overrides any settings from the
+<ph/> configuration file.</shortdesc>
+<prolog><metadata>
+<keywords><indexterm>environment
+variables<indexterm>OCK_EP11_TOKEN_DIR</indexterm><indexterm>OPENCRYPTOKI_TRACE_LEVEL</indexterm></indexterm>
+<indexterm>setting environment
+variables<indexterm>OCK_EP11_TOKEN_DIR</indexterm><indexterm>OPENCRYPTOKI_TRACE_LEVEL</indexterm></indexterm>
+<indexterm>OCK_EP11_TOKEN_DIR</indexterm>
+<indexterm>OPENCRYPTOKI_TRACE_LEVEL</indexterm>
+<indexterm>opencryptoki.conf</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+configuration<indexterm>opencryptoki.conf</indexterm></indexterm></keywords><?Pub
+Caret 34?>
+</metadata></prolog>
+<refbody>
+<section> <p>The following variables are available:</p> <dl><dlentry>
+<dt>OCK_EP11_TOKEN_DIR</dt>
+<dd>specifies a directory for all available <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration files. If multiple configuration
+files are available, they must all be located below this directory. <p>The default directory for the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration files is
+<filepath>/etc/opencryptoki/</filepath>. This is the same directory where the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration file
+<filepath>opencryptoki.conf</filepath> is stored. </p><p>Examples:
+<codeblock>
+export OCK_EP11_TOKEN_DIR=/home/user/ep11token
+export OCK_EP11_TOKEN_DIR=/var/lib/opencryptoki/</codeblock></p><note
+type="other" othertype="Notes">
+<ul>
+<li>Objects belonging to a certain <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+are stored in a different directory specified by the <parmname>tokname</parmname> attribute in
+<filepath>opencryptoki.conf</filepath>.</li>
+<li rev="iv3">The setting of this environment variable is ignored, if a program trying to access the
+designated <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is marked with file
+permission <codeph>setuid</codeph>. </li>
+</ul>
+</note></dd>
+</dlentry><dlentry>
+<dt>OPENCRYPTOKI_TRACE_LEVEL</dt>
+<dd>defines the granularity of logging support. Valid values are between 0 and 5. For information
+about log levels, read topic <xref
+href="lxce_trouble_ep11tokenlogging.dita#l31xce00_trouble_ep11tokenlogging"/>. <p>Example:
+<codeblock rev="i1v2">export OPENCRYPTOKI_TRACE_LEVEL=2</codeblock></p></dd>
+</dlentry></dl> </section>
+</refbody>
+</reference>
+<?Pub *0000001723?>

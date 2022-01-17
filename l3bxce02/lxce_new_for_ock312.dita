@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN" "ibm-topic.dtd">
+<topic id="new_for_312" xml:lang="en-us" rev="iv3">
+<title>Updates for the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> versions 3.11 up to 3.15 </title>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>summary of changes<indexterm>updates for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.12 <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></indexterm></indexterm>
+<indexterm>access control point<indexterm>domain control point</indexterm></indexterm>
+<indexterm>domain control point<indexterm>access control point</indexterm></indexterm>
+</keywords>
+</metadata>
+</prolog>
+<body>
+<p>The following enhancements are implemented for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/> for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.15. For complete exploitation of the
+listed enhancements, the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11hostlib"/> version
+3.0 is required.</p>
+<ul>
+<li><!--SEC1810 (part1) + SEC1703--> The performance of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is improved by the following features: <ul>
+<li><!--SEC1810 (part 1) -  draft ready-->For single part sign- and verify-operations, as well as
+for single part encrypt- or decrypt-operations, the <apiname>init</apiname> call is not passed
+through the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> host library as long as there
+is no corresponding multi-part operation. You must explicitly enable this feature with the new
+option OPTIMIZE_SINGLE_PART_OPERATIONS in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration file. </li>
+<li><!--SEC1703--> You can request to increase the performance of hash operations. Setting the new
+DIGEST_LIBICA option in the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+configuration file causes the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> to load
+the default <keyword conref="lxce_conref.dita#l31xce00_conref/libica"/> library on initialization.
+For required hash operations during processing, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> then uses the <keyword
+conref="lxce_conref.dita#l31xce00_conref/libica"/> SHA-based hash functions. These hash functions
+perform on the <keyword conref="lxce_conref.dita#l31xce00_conref/cpacf"/>, thus avoiding hash
+processing on a <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/> and therefore
+avoiding I/O operations to the coprocessor. </li>
+</ul></li>
+<li><!--SEC1714-->You can set the new USE_PRANDOM option in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> configuration file to control from where the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> reads random data. When you specify
+USE_PRANDOM, then the token does not read random data from the random number generator of the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11coproc"/>. Instead, random data is read from
+<filepath>/dev/prandom</filepath>, or <filepath>/dev/urandom</filepath> if
+<filepath>/dev/prandom</filepath> is not available, . </li>
+<li><!--SEC1803 zMidas = z14--> With GA2 of the <ph conref="lxcommon.dita#phrases/ph_ibmz14"/>, the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> provides the following enhancements: <ul>
+<li>Support of the bit coin curve <term>secp256k1</term> is added to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>.</li>
+<li>Support of the RSA OAEP mechanism CKM_RSA_PKCS_OAEP for encrypt and decrypt, as well as for wrap
+and unwrap operations.</li>
+<li>Support of a new domain control point (access control point) related to a new BSICC2017
+compliance mode. When enabled, this compliance mode disables the RSA<keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> v1.5 mechanisms.</li>
+</ul></li>
+<li><!-- zthemis = z15: SEC1913 GA1 Sep2019 + SEC1919 GA1 Nov2019 - (1913 is preparer for 1919)-->
+With the availability of the <ph conref="lxcommon.dita#phrases/ph_ibmz15"/> in September 2019, the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> provides the following new features: <ul>
+<!--SEC1913 - draft ready -->
+<li>SHA3 support via a vendor-specific mechanisms.</li>
+<li>Support of CMAC via standard and vendor-specific mechanisms.</li>
+<li>Support of the CKM_ECDH1_DERIVE mechanism according to <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> v2.4 semantics.</li>
+</ul><p>With these enhancements provided as a prerequisite in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> host library version 3.0, you can additionally
+exploit the following features of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+with the availability of the <ph conref="lxcommon.dita#phrases/ph_ibmz15"/> in November 2019:</p><ul>
+<!--SEC1919 - zthemis = z15 GA1 Nov-->
+<li>Support of the RSA OAEP mechanism with SHA2 and SHA3 as hashing algorithms and mask generation
+function (MGF) algorithm is available.</li>
+<li>New <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>-specific mechanisms are provided
+for the support of elliptic curve cryptography (ECC). With these, you can use Edwards Curves
+<term>ed25519</term> and <term>ed448</term> for EdDSA and Montgomery curves <term>curve25519</term>
+and <term>curve448</term> for ECDH.</li>
+<li>New domain (access) control points are implemented to control elliptic curve cryptography, to
+allow data key generation and import for protected keys, and to enable the use of the post-quantum
+Dilithium signature algorithm.</li>
+</ul></li>
+<li><!--SEC1810 (part 2) - draft ready-->Function <apiname>C_DigestKey</apiname> now always returns
+CKR_FUNCTION_NOT_SUPPORTED since the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+library does no longer support it.</li>
+<li><!--SEC1818  + SEC2015: post quantum stage 1 and 2-->The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is getting ready for post-quantum
+cryptography: <ul>
+<li><!--SEC1818-->You can use the quantum safe CRYSTALS-Dilithium Digital Signature Algorithm for
+generating keys and for signing and verifying digital signatures.</li>
+<li><!--SEC2015-->You can import and transport externally generated Dilithium keys.</li>
+</ul></li>
+<li><!--SEC2001--><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> now implements the
+<term>PKCS #11 version 3.0 Baseline Provider</term> specification. A library implementing <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> according to the <b>Baseline Provider Clause</b>
+as described in <xref
+href="https://docs.oasis-open.org/pkcs11/pkcs11-profiles/v3.0/pkcs11-profiles-v3.0.html"
+format="html" scope="external">PKCS #11 Cryptographic Token Interface Profiles Version 3.0</xref> is
+called a <term>PKCS #11 version 3.0 Baseline Provider</term>. Such a library can be exploited by an
+application conforming to the <b>Baseline Consumer Clause</b> described in the same document. Such
+applications are in turn called <term>PKCS #11 version 3.0 Baseline Consumers</term>. </li>
+<li><!--SEC2018-->A new vendor-specific function called <apiname>C_IBM_ReencryptSingle</apiname> is
+introduced into <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> and is supported by all
+tokens. Data that is already encrypted with a specific key and mechanism can be re-encrypted with
+this function, using a different key and mechanism. For secure key encryption with an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> or a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cca"/> token, the data is never visible in the clear
+anywhere outside the <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/>.</li>
+<li><!--SEC1911 and SEC1912: token data storing format: using pkcstok_migrate -->You can use the
+<cmdname>pkcstok_migrate</cmdname> utility to transform an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cca"/> token, an ICA token, or a Soft Token created with
+any version of <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> into a data format that was 
+generated by FIPS compliant operations. This new data format can be used with
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.12 or later. However, also
+for version 3.12 or later, the old non-compliant format is the default. Being FIPS compliant,
+the token data is stored in a format that is better protected against attacks than the previously
+used data format without FIPS compliance.</li>
+</ul>
+</body>
+</topic>
+<?Pub *0000001545?>

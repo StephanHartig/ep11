@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<reference id="l31xce00_initializing_ep11token" xml:lang="en-us">
+<title>Initializing <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/></title>
+<titlealts>
+<navtitle>Initializing <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/></navtitle>
+<searchtitle>Initializing <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"
+/></searchtitle>
+</titlealts>
+        <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+<shortdesc>Once the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration file
+and the configuration files of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>
+are set up, and the <cmdname>pkcsslotd</cmdname> daemon is started, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> instances must be initialized. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>pkcsconf</indexterm><indexterm>token<indexterm>initializing</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"></keyword><indexterm>SO
+                                                PIN</indexterm><indexterm>standard
+                                        PIN</indexterm></indexterm>
+                                <indexterm>security officer (SO)<indexterm>log-in
+                                        PIN</indexterm></indexterm>
+                                <indexterm>SO<indexterm>log-in PIN</indexterm></indexterm>
+                                <indexterm>standard user (User)<indexterm>log-in
+                                        PIN</indexterm></indexterm>
+                                <indexterm>User<indexterm>log-in PIN</indexterm></indexterm>
+                                <indexterm>PIN</indexterm>
+                                <indexterm>log-in PIN</indexterm>
+</keywords>
+</metadata></prolog>
+<refbody>
+<section>
+                        <note><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> defines
+two users for each <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> instance: a
+security officer (SO) whose responsibility is the administration of the token, and a standard user
+(User) who wants to use the token to perform cryptographic operations. <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> requires that for both the SO and the User a
+log-in PIN is defined as part of the token initialization.</note><p>The following command provides some useful slot
+                                information:<screen># pkcsconf -s
+
+Slot #0 Info
+        Description: EP11 Token
+        Manufacturer: IBM
+        Flags: 0x1 (TOKEN_PRESENT)
+        Hardware Version: 4.0
+        Firmware Version: 2.11
+Slot #1 Info
+        Description: ICA Token
+        Manufacturer: IBM
+        Flags: 0x1 (TOKEN_PRESENT)
+        Hardware Version: 4.0
+        Firmware Version: 2.10</screen></p><p>Find your preferred token instance in the details list and select the correct slot number. This
+number is used in the next initialization steps to identify your
+token:<screen>
+$ pkcsconf -I -c &lt;slot> // Initialize the Token and setup a Token Label
+
+$ pkcsconf -P -c &lt;slot> // change the SO PIN (recommended)
+
+$ pkcsconf -u -c &lt;slot> // Initialize the User PIN (SO PIN required)
+
+$ pkcsconf -p -c &lt;slot> // change the User PIN (optional)</screen></p> 
+                       <dl><dlentry>
+<dt><codeph>pkcsconf -I</codeph></dt>
+<dd>During token initialization, you are asked for a token label. Provide a meaningful name, because
+                                                you might need this reference for identification
+                                                purposes.</dd>
+</dlentry>
+                                <dlentry rev="i2">
+                                        <dt><codeph>pkcsconf -P</codeph></dt>
+                                        <dd>For security reasons, <keyword
+                                                  conref="lxce_conref.dita#l31xce00_conref/ocrypto"
+                                                /> requires that you change the default SO PIN
+                                                  (<userinput>87654321</userinput>) to a different
+                                                value. Use the <codeph>pkcsconf -P</codeph> option
+                                                to change the SO PIN. </dd>
+                                </dlentry><dlentry rev="i2">
+                                        <dt><codeph>pkcsconf -u</codeph></dt>
+                                        <dd>When you enter the user PIN initialization you are asked
+                                                for the newly set SO PIN. The length of the user PIN
+                                                must be 4 - 8 characters.</dd>
+                                </dlentry><dlentry>
+<dt><codeph>pkcsconf -p</codeph></dt>
+<dd rev="i2">You must at least once change the user PIN with <codeph>pkcsconf -p</codeph> option.
+                                                After you completed the PIN setup, the token is
+                                                prepared and ready for use.</dd>
+</dlentry></dl><?Pub Caret 754?><note>Define a user PIN that is different from <userinput>12345678</userinput>, because this pattern
+is checked internally and marked as default PIN. A log-in attempt with this user PIN is recognized
+as <term>not initialized</term>. </note></section>
+</refbody>
+</reference>
+<?Pub *0000003871?>

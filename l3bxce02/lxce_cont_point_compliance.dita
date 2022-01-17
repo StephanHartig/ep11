@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="lxce_cont_point_compliance" xml:lang="en-us" rev="iv3">
+<title>Supporting the BSICC2017 compliance mode</title>
+<titlealts>
+<navtitle>BSICC2017 compliance mode</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Supporting the BSICC2017
+compliance mode</searchtitle>
+</titlealts>
+<!--SH: Acrolinx never ran-->
+<shortdesc>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> provides an access
+control point (ACP) to enable the BSICC2017 compliance mode. When enabled, this compliance mode
+disables the  RSA PKCS #1 v1.5 mechanisms.</shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>BSICC2017 compliance mode <indexterm>access control point</indexterm></indexterm>
+<indexterm>access control point <indexterm>BSICC2017 compliance mode</indexterm></indexterm>
+<indexterm>control point <indexterm>BSICC2017 compliance mode</indexterm></indexterm>
+<indexterm>ACP <indexterm>BSICC2017 compliance mode</indexterm></indexterm>
+</keywords>
+</metadata>
+</prolog>
+<conbody>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11hostlib"/> supports access control
+point 61 which is related to the BSICC2017 compliance mode. </p>
+<codeblock>61    XCP_CPB_ALG_NBSI2017           enable the BSICC2017 compliance mode</codeblock>
+<p>This ACP can be used to disable the following RSA PKCS #1 v1.5 mechanisms:</p>
+<ul>
+<li>CKM_RSA_PKCS</li>
+<li>CKM_SHA1_RSA_PKCS</li>
+<li>CKM_SHA224_RSA_PKCS</li>
+<li>CKM_SHA256_RSA_PKCS</li>
+<li>CKM_SHA384_RSA_PKCS</li>
+<li>CKM_SHA512_RSA_PKCS</li>
+</ul>
+</conbody>
+</concept>
+<?Pub *0000004141?>

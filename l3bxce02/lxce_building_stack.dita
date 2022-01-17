@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_building_stack" xml:lang="en-us">
+<title>Building the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> crypto
+      stack</title>
+<titlealts>
+<navtitle>Building the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> crypto
+         stack</navtitle>
+<searchtitle>Building the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> crypto
+         stack</searchtitle>
+</titlealts>
+<!--SH: Acrolinx run on Apr. 8, 2014, shows no flags-->
+<abstract>     <shortdesc>The components of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>
+must be embedded into an infrastructure of hardware and software cryptographic components. In this
+environment, applications can start the provided functions by using the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> API. This infrastructure is referred to
+as <keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"/>.</shortdesc> 
+   <p>To enable the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> hardware cryptographic
+function support on <ph conref="lxcommon.dita#phrases/ph_ibmz"/> mainframes, you must prepare some
+hardware components. You must also install and load specific driver modules and libraries, configure
+and start daemons, and set up your system environment.</p> 
+ </abstract>
+<prolog><metadata>
+<keywords><indexterm>crypto stack<indexterm>building</indexterm></indexterm>
+<indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11stack"></keyword><indexterm>building</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"></keyword> crypto
+            stack<indexterm>building</indexterm></indexterm><indexterm>token
+directory</indexterm></keywords>
+</metadata></prolog>
+<conbody>
+<p otherprops="pdf">Building this <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11stack"></keyword> 
+        comprises several subtasks that are described in the following
+topics:</p>
+<ul otherprops="pdf">
+<li><xref href="lxce_preparing_cex4p.dita#l31xce00_preparing_cex4p"></xref></li>
+<li><xref
+href="lxce_installing_zcrypt.dita#l31xce00_installing_zcrypt"></xref></li>
+<li><xref
+href="lxce_installing_hostpart.dita#l31xce00_installing_hostpart"></xref></li>
+<li><xref href="lxce_setting_mk.dita#l31xce00_setting_mk"></xref></li>
+<li><xref
+href="lxce_installing_ocryptoki.dita#l31xce00_installing_ocryptoki"></xref></li>
+<li><xref
+href="lxce_configuring_ep11tok.dita#l31xce00_configuring_ep11tok"></xref></li>
+<!--<li><xref format="dita" href="lxce_configuring_pkcs11impl.dita" scope="local" type="concept"/></li>--><?Pub Caret -2?>
+</ul>
+</conbody>
+</concept>
+<?Pub *0000003131?>

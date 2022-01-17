@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN" "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="ep11_stackoverview" xml:lang="en-us">
+    <title><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> overview</title>
+    <!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+    <?Pub Caret -1?>
+    <shortdesc><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> consists of an
+implementation of the <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API, a slot
+manager, an API for slot token dynamic link libraries (STDLLs), and a set of STDLLs (or tokens). The
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is a new STDLL introduced with
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.1.</shortdesc>
+    <prolog>
+        <metadata>
+            <keywords>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/><indexterm
+                        rev="">general information</indexterm></indexterm>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"
+                        /><indexterm>overview</indexterm></indexterm>
+                <indexterm>slot manager</indexterm>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+                    library</indexterm>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>
+                    standard</indexterm>
+                <indexterm>ibopencryptoki.so</indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    <conbody>
+        <p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+            <ph rev="i2">base library</ph> (<filepath>libopencryptoki.so</filepath>) provides the
+            generic API as outlined in the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> specification (version 2.20).
+            This <ph rev="i2">library</ph> also loads token-specific modules (STDLLs) that provide
+            the token specific implementation of the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API and cryptographic
+            functions (for example, session management, object management, and crypto algorithms).
+            For a description of the <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>
+            version 2.20 standard, refer to the following URL: <xref
+                conref="lxce_conref.dita#links/pkcs11_standard_url"/></p>
+        <p>A global configuration file (<filepath>/etc/opencryptoki/opencryptoki.conf</filepath>) is
+            provided which describes the available tokens. This configuration file can be customized
+            for the individual tokens. The <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> package contains man pages
+            that describe the format of the configuration files. For more information, see <xref
+                href="lxce_settingup_token_daemon.dita#l31xce00_settingup_token_daemon"/>.</p>
+<p rev="i2">The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is a plug-in into
+            the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> token library,
+            providing support for several cryptographic algorithms.</p><section><title>Slot manager</title><indexterm>pkcsslotd</indexterm>The slot manager
+                (<cmdname>pkcsslotd</cmdname>) runs as a daemon. Upon startup, it creates a shared
+            memory segment and reads the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> configuration file to
+            acquire the available token and slot information.  The <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> API attaches to this memory
+            segment to retrieve token information. Thus, the slot manager provides the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> API with the token
+            information when required.  An application in turn links to or loads the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> API.</section>
+        <section><title>Slot token dynamic link libraries (STDLLs)</title><indexterm>slot token
+dynamic link libraries (STDLLs)</indexterm><indexterm>STDLL</indexterm>
+<indexterm>STDLLs</indexterm> The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is
+an example of an STDLL within <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>. STDLLs
+are plug-in modules to the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> (main) <ph
+rev="i2">API</ph>. They provide token-specific functions that implement the interfaces. Specific
+devices can be supported by building an appropriate STDLL. <xref
+href="lxce_stack.dita#l31xce00_stack/f_ep11_overview"/> illustrates the stack and the process flow
+in an <ph conref="lxcommon.dita#phrases/ph_ibmz"/> environment. <p>The STDLLs require local disk
+space to store persistent data, such as token information, personal identification numbers (PINs)
+and token objects. This information is stored in a separate directory for each token (<ph rev="i1v2"
+>per default</ph> in <filepath>/var/lib/opencryptoki/ep11tok</filepath> for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>). Within each of these directories there is a
+sub-directory <filepath>TOK_OBJ</filepath> that contains the token objects (token key store). Each
+private token object is represented by an encrypted file. Most of these directories are created
+during installation of <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>.</p></section>
+        <section><title>The <codeph>pkcsconf</codeph> command line
+program</title><indexterm>pkcsconf</indexterm><indexterm>command line
+program<indexterm>pkcsconf</indexterm></indexterm><indexterm>security officer
+(SO)</indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> provides a command line
+program <filepath>(/usr/lib/pkcs11/methods/pkcsconf)</filepath> to configure and administer tokens
+that are supported within the system. The <codeph>pkcsconf</codeph> capabilities include token
+initialization, and security officer (SO) PIN and user PIN initialization and maintenance (see also
+<xref href="lxce_initializing_ep11token.dita#l31xce00_initializing_ep11token"
+/>).<p><codeph>pkcsconf</codeph> operations that address a specific token must specify the slot that
+contains the token with the <cmdname>-c</cmdname> option. You can view the list of tokens present
+within the system by specifying the <cmdname>-t</cmdname> option. Type <codeph>pkcsconf ?</codeph>
+into a command line to show the options for the <codeph>pkcsconf</codeph> command:</p><p>
+<screen># pkcsconf ?
+usage: pkcsconf [-itsmlIupPh] [-c slotnumber -U user-PIN -S SO-PIN -n new PIN]</screen>
+</p><p>The available options have the following meanings: </p><dl>
+<dlentry>
+<dt>-i</dt>
+<dd>display PKCS11 info</dd>
+</dlentry>
+<dlentry>
+<dt>-t</dt>
+<dd>display token info</dd>
+</dlentry>
+<dlentry>
+<dt>-s</dt>
+<dd>display slot info</dd>
+</dlentry>
+<dlentry>
+<dt>-m</dt>
+<dd>display mechanism list</dd>
+</dlentry>
+<dlentry>
+<dt>-l</dt>
+<dd>display slot description </dd>
+</dlentry>
+<dlentry>
+<dt>-I</dt>
+<dd>initialize token</dd>
+</dlentry>
+<dlentry>
+<dt>-u</dt>
+<dd>initialize user PIN</dd>
+</dlentry>
+<dlentry>
+<dt>-p</dt>
+<dd>set the user PIN</dd>
+</dlentry>
+<dlentry>
+<dt>-P</dt>
+<dd>set the SO PIN</dd>
+</dlentry>
+<dlentry>
+<dt>-h | --help | ?</dt>
+<dd>show this help</dd>
+</dlentry>
+<dlentry>
+<dt>-c</dt>
+<dd>specify the token slot for the operation </dd>
+</dlentry>
+<dlentry>
+<dt>-U</dt>
+<dd>the current user PIN (for use when changing the user pin with -u and -p options); if not
+specified, user will be prompted</dd>
+</dlentry>
+<dlentry>
+<dt>-S</dt>
+<dd>the current Security Officer (SO) pin (for use when changing the SO pin with -P option); if not
+specified, user will be prompted</dd>
+</dlentry>
+<dlentry>
+<dt>-n</dt>
+<dd>the new pin (for use when changing either the user pin or the SO pin with -u, -p or -P options);
+if not specified, user will be prompted</dd>
+</dlentry>
+</dl><p>For more information about the <codeph>pkcsconf</codeph> command, see the
+<codeph>pkcsconf</codeph> man page.</p></section></conbody>
+</concept>
+<?Pub *0000000942?>

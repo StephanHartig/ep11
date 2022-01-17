@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<reference id="lxce_quantum" xml:lang="en-us" rev="iv3">
+<title>Quantum safe cryptography with the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></title>
+<titlealts>
+<navtitle>Quantum safe cryptography</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Quantum safe
+cryptography with the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/></searchtitle>
+</titlealts>
+<!--SH: Acrolinx never ran-->
+<shortdesc>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> offers features for
+quantum safe cryptography.</shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>post-quantum cryptography <indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/></indexterm><indexterm>Dilithium</indexterm></indexterm>
+<indexterm>quantum safe cryptography <indexterm><keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/></indexterm><indexterm>Dilithium</indexterm></indexterm>
+<indexterm>Dilithium<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/></indexterm><indexterm>quantum safe cryptography</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+<indexterm>quantum safe cryptography</indexterm><indexterm>Dilithium</indexterm></indexterm>
+</keywords>
+</metadata>
+</prolog>
+<refbody><section>
+<p>Quantum safe or post-quantum cryptography denotes cryptographic algorithms that resist attacks
+from classical as well as from quantum computers. The CRYSTALS-Dilithium Digital Signature Algorithm
+is a digital signature scheme and one of the candidate algorithms in the NIST Post-Quantum
+Cryptography Standardization Process.</p>
+<p>In the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, the CRYSTALS-Dilithium
+algorithm provides security category <term>SHA384 / SHA3-384</term> and performance category
+<term>Dilithium-1536x1280 (also called Dilithium-6-5)</term>. On the <keyword
+conref="lxce_conref.dita#l31xce00_conref/atkews"/>, you must enable Dilithium by setting domain
+(access) control point 65 on the used <keyword
+conref="lxce_conref.dita#l31xce00_conref/cryptocoprocs"/>:</p>
+<codeblock>65    XCP_CPB_ALG_PQC_DILITHIUM           enable support for Dilithium algorithm</codeblock>
+<p> Because Dilithium keys can only sign or verify, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> only provides one single mechanism for all
+three operations: key generation, sign, and verify: CKM_IBM_DILITHIUM (see also <xref
+href="lxce_mechanisms.dita#l31xce00_mechanisms/ep11_table_mechanisms"/>).</p>
+<p>With the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, you can also import and
+export Dilithium keys by wrapping or unwrapping them using AES or TDES key encrypting keys (KEKs).
+That is, you can protect Dilithium keys that are sent to another system, received from another
+system, or stored with data in a file.</p>
+</section>
+<section><title>Restrictions for using Dilithium keys</title>
+<ul>
+<li><keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> Dilithium keys cannot actively be used
+to transport (wrap and unwrap) other keys, but they can be transported using standard key types
+(AES, TDES).</li>
+<li><keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> Dilithium keys cannot be derived from
+given keys. They can only be generated or imported from given key values.</li>
+</ul>
+</section>
+</refbody>
+</reference>
+<?Pub *0000004141?>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<task id="slbdt_usingdumptools" xml:lang="en-us">
+<title>Using the <keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/></title>
+<titlealts>
+<navtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.15</navtitle>
+<searchtitle>Using the <keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/></searchtitle><?Pub
+Caret -1?>
+</titlealts><abstract><shortdesc><keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/> applications that are using
+a <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API can take advantage of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11long" activity=""/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/>) coprocessor mode of an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> cryptographic adapter (Crypto Express), <ph
+rev="i1v2">starting with a CEX4P coprocessor.</ph></shortdesc></abstract>
+<prolog><metadata>
+<keywords>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11long"/></indexterm>
+<indexterm>coprocessor mode</indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/></indexterm>
+</keywords>
+</metadata></prolog>
+<taskbody></taskbody>
+<?tm 1274561387 8?>
+</task>
+<?Pub *0000001073?>

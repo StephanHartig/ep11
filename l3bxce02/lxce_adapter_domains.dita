@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_adapter_domains" xml:lang="en-us">
+<title>Assigning adapters and domains to LPARs</title>
+<!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Assigning adapters and domains to LPARs</navtitle>
+<searchtitle>Assigning adapters and domains to LPARs</searchtitle>
+</titlealts>
+<shortdesc>After you set up the Crypto Express adapter in the Support Element, you must allow access
+to it from your LPAR. You achieve this by using the Hardware Management Console (HMC) or the Support
+Element (SE). </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>assigning adapters and domains<indexterm>to LPARs</indexterm></indexterm>
+<indexterm> adapters and domains<indexterm>assigning to LPARs</indexterm></indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<p>You can define a certain LPAR to use a domain (or multiple domains) as a usage domain and as a
+control domain, or as a control domain only. You can retrieve this information from the Support
+Element. Each adapter supports 16 domains (see <xref
+href="#l31xce00_adapter_domains/f_assign_adapters_lpars" format="dita"/>). The selected domains
+apply to all selected adapters. For a more detailed information about planning the cryptographic
+configuration, see <cite>IBM System z10 Enterprise Class Configuration Setup, SG24-7571</cite>. <fig
+expanse="column" id="f_assign_adapters_lpars">
+<title>Cryptographic configuration for LPAR A2A</title>
+<image href="lxce_assign_adapters_lpars.jpg" placement="break" width="600">
+<alt>Cryptographic configuration for LPAR A2A</alt>
+</image>
+</fig>  In <xref format="dita" href="#l31xce00_adapter_domains/f_assign_adapters_lpars"/>, LPAR A2A
+is defined to use and control the cryptographic domain number 11. It is also allowed to access the
+crypto adapters numbers 0 and 7. They are brought online if they are present in the system, if the
+LPAR is activated, and if the <b>zcrypt </b> device driver is loaded. </p>
+<p><ph rev="i1v2"><keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> kernels earlier than
+version 4.9 can only use one crypto domain at a given time. In that case, if the LPAR contains
+multiple domains, the kernel selects the default domain.</ph> Also, if for these kernel versions you
+want to use a different default domain, you need to specify this domain as a parameter when loading
+the <term>ap</term> main module of the zcrypt device driver.</p>
+</conbody>
+</concept>
+<?Pub *0000002177?>

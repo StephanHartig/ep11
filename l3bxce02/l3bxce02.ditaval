@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><val>
+
+
+
+
+
+   <revprop action="include" changebar="|1" val="i1"/>
+   <revprop action="include" changebar="|2" val="i2"/>
+   <revprop action="include" changebar="|3" val="i3"/>
+   <revprop action="include" changebar="|4" val="i4"/>
+   <revprop action="include" changebar="|3" val="i1v01"/>
+   <revprop action="include" changebar="|" val="i1v2"/>
+   <revprop action="flag" changebar="|" val="iv3"/>
+   
+      
+
+
+
+   <prop action="include" att="otherprops" val="pdf"/>
+   <prop action="exclude" att="otherprops" val="NOTpdf"/>
+
+
+
+   <prop action="include" att="platform" val="onlyall"/>
+   <prop action="exclude" att="platform" val="onlyse"/>
+   <prop action="exclude" att="platform" val="onlyrh"/>
+
+
+   
+   </val>

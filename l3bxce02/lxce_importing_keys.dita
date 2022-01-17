@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<reference id="l31xce00_importing_keys" xml:lang="en-us" rev="i1v2">
+<title>Importing keys</title>
+<titlealts>
+<navtitle>Importing keys</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Importing
+keys</searchtitle>
+</titlealts>
+<!--SH: Acrolinx run on ...-->
+<shortdesc>You can import keys of type CKK_AES, CKK_3DES, CKK_DSA, CKK_RSA, CKK_DH, and CKK_EC from
+plain text key values using function <apiname>C_CreateObject</apiname>. The resulting key objects
+are secure (<codeph>CKA_SENSITIVE = CK_TRUE and CKA_ALWAYS_SENSITIVE = CK_FALSE</codeph>).</shortdesc>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>key importing</indexterm>
+<indexterm>importing
+keys<indexterm>CKK_AES</indexterm><indexterm>CKK_3DES</indexterm><indexterm>CKK_RSA</indexterm><indexterm>CKK_DH</indexterm><indexterm>CKK_EC</indexterm><indexterm>CKK_DSA</indexterm></indexterm>
+<indexterm>CKK_AES</indexterm>
+<indexterm>CKK_3DES</indexterm>
+<indexterm>CKK_RSA</indexterm>
+<indexterm>CKK_DH</indexterm>
+<indexterm>CKK_EC</indexterm>
+</keywords>
+</metadata>
+</prolog>
+<refbody>
+<section>
+<p>To import keys of type CKK_AES, CKK_DES2, CKK_3DES, and CKK_GENERIC_SECRET, you must provide a
+template that contains the following attributes:</p>
+<ul>
+<li>CKA_VALUE</li>
+</ul>
+</section>
+<section>
+<p>To import keys of type CKK_DSA, you must provide a template that contains the following
+attributes:</p>
+<ul>
+<li>CKA_PRIME (also called p)</li>
+<li>CKA_SUBPRIME (also called q)</li>
+<li>CKA_BASE (also called g)</li>
+<li>CKA_VALUE (private key x or public key y)</li>
+</ul>
+</section>
+<section>
+<p>To import keys of type CKK_RSA, you must provide a template that contains the following
+attributes:</p>
+<ul>
+<li>CKA_MODULUS </li>
+<li>CKA_PUBLIC_EXPONENT</li>
+<li>CKA_PRIVATE_EXPONENT (for private key import only)</li>
+<li>CKA_PRIME_1 (for private key import only)</li>
+<li>CKA_PRIME_2 (for private key import only)</li>
+<li>CKA_EXPONENT_1 (for private key import only)</li>
+<li>CKA_EXPONENT_2 (for private key import only)</li>
+<li>CKA_COEFFICIENT (for private key import only)</li>
+</ul>
+<?Pub Caret -1?>
+</section>
+<section>
+<p>To import keys of type CKK_DH, you must provide a template that contains the following
+attributes:</p>
+<ul>
+<li>CKA_PRIME (also called p)</li>
+<li>CKA_BASE (also called g)</li>
+<li>CKA_VALUE (private key x or public key y)</li>
+</ul>
+</section>
+<section>
+<p>To import keys of type CKK_EC (synonym CKK_ECDSA), you must provide a template that contains the
+following attributes:</p>
+<ul>
+<li>CKA_EC_PARAMS</li>
+<li>CKA_EC_POINT</li>
+<li>CKA_VALUE (for private key import only)</li>
+</ul>
+</section>
+</refbody>
+</reference>
+<?Pub *0000001279?>

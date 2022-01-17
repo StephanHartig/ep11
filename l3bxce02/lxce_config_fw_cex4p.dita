@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<task id="l31xce00_config_fw_cex4p" xml:lang="en-us">
+<title>Enabling a <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/> for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware exploitation</title>
+  <!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Enabling a <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter for
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware exploitation</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: Enabling a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter for <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware exploitation</searchtitle>
+</titlealts>
+ <abstract>
+  <shortdesc>You must have an <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/> 4765 Crypto
+Express4 feature or higher that is configured as an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor, and that is initialized and
+personalized in your <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guest or LPAR. Read
+this topic to learn how to check for the existence of a suitably configured <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter (starting with CEX4P, or higher), and
+how to configure this adapter if it is missing yet.</shortdesc>
+ </abstract><?Pub
+Caret 62?>
+<prolog><metadata>
+<keywords><indexterm>configuring <keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cex4p"/><indexterm>configuring
+</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/><indexterm>configuring
+</indexterm></indexterm>
+<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware</indexterm>
+        <indexterm>lszcrypt</indexterm>
+        <indexterm>Support Element</indexterm>
+        <indexterm>TKE commands<indexterm>permit</indexterm></indexterm>
+        <indexterm>permit TKE commands</indexterm>
+        <indexterm>chzcrypt command</indexterm>
+        <indexterm>ep11TKEd</indexterm>
+        <indexterm>TKE daemon</indexterm>
+</keywords>
+</metadata></prolog>
+<taskbody>
+<context>A CEX*S Crypto Express card configured in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11long"/> coprocessor mode (or shortly <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> coprocessor mode) is also called a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> (<keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>). Such a coprocessor, which is installed in
+your <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> guest or LPAR, is a prerequisite for
+using the functions of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>. This
+procedure shows you how to configure a CEX*S Crypto Express adapter into a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter by enabling the installed <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware from the Support Element.</context>
+<steps>
+<step id="fwstp1">
+<cmd>Check whether you have already plugged in and enabled your CEX*S Crypto Express card, and
+validate your model and type configuration (accelerator or coprocessor).</cmd>
+<info>
+<p>To check, enter the <cmdname>lszcrypt</cmdname> command and check the output:</p>
+<screen rev="iv3">
+# lszcrypt
+CARD.DOMAIN TYPE  MODE        STATUS  REQUESTS
+----------------------------------------------
+00          CEX5A Accelerator online         0
+00.001a     CEX5A Accelerator online         0
+01          CEX5C CCA-Coproc  online        50
+01.001a     CEX5C CCA-Coproc  offline       50
+02          CEX6C CCA-Coproc  online        55
+02.001a     CEX6C CCA-Coproc  offline       55
+03          CEX6P EP11-Coproc online         8
+03.001a     CEX6P EP11-Coproc online         8
+05          CEX7P EP11-Coproc online       104
+05.001a     CEX7P EP11-Coproc online       104
+
+
+</screen>
+<p>If you see the output as shown, with an output line similar to
+<codeblock rev="i1v2">xx.xxxx     CEX6P EP11-Coproc online</codeblock>then an <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex6p"/> adapter is available and ready for use with
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> and the task is completed.</p>
+</info>
+</step>
+<step>
+<cmd>If the following error message is displayed, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver module must be installed. </cmd>
+<info>
+<p><systemoutput>error - cryptographic device driver zcrypt is not loaded!</systemoutput></p>
+<p> For installation information, refer to <xref href="lxce_installing_zcrypt.dita"/>.</p>
+</info>
+</step>
+      <step>
+<cmd>If the output from the <cmdname>lszcrypt</cmdname> command in <xref
+href="#l31xce00_config_fw_cex4p/fwstp1" format="dita">step 1</xref> does not show one of
+<cmdname>CEX&lt;n>P</cmdname>, (where <cmdname>&lt;n></cmdname> can be 4, or higher), then check the
+reason why this happened. If a CEX*S card is correctly assigned to the LPAR or <keyword
+conref="lxce_conref.dita#l31xce00_conref/zvm"/> guest, where the <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> is running in, but none of
+<cmdname>CEX&lt;n>P</cmdname> is shown, then you must activate the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware on the CEX*S adapter. </cmd>
+<info>For this purpose, log on to the Support Element with a user ID granted the appropriate access
+rights. You can either go directly to the Support Element, or you can use its web interface. </info>
+</step>
+      <step id="fwstp4">
+<cmd>In the <uicontrol>System Management</uicontrol> window, select the CPC that holds the CEX*S
+adapter that you want to configure.</cmd>
+<info>In the sample screen from <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p1" format="dita"
+/>, the selected CPC is <term>M35</term>.<fig id="l31xce00_cex4p1" rev="i1v2">
+<title>System Management in the Support Element</title>
+<image placement="break" href="lxce_f_se1.jpg" width="550" height="400">
+<alt>System Management in the Support Element</alt>
+</image>
+</fig></info>
+</step>
+      <step>
+<cmd>Select <uicontrol>Cryptos</uicontrol> from the navigation area on the left of the dialog to get
+a list of installed adapters as shown in <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p2"
+format="dita"/>.</cmd>
+<info>
+<fig id="l31xce00_cex4p2">
+<title>System Management - installed crypto adapters</title>
+<image placement="break" href="lxce_f_se2.jpg" width="550" height="500">
+<alt>System Management - installed crypto adapters</alt>
+</image>
+</fig>
+</info>
+</step>
+      <step rev="i1v2">
+<cmd>Select the crypto card to be changed - in our scenario, a CEX6 coprocessor with PCHID 01DC and
+ID 11 - and also select <uicontrol>Configure On/Off</uicontrol> from the <uicontrol>Crypto Service
+Operations</uicontrol> to reach the view shown in <xref
+href="#l31xce00_config_fw_cex4p/l31xce00_cex4p3" format="dita"/>.</cmd>
+<info>
+<fig id="l31xce00_cex4p3">
+<title>System Management - configure LPARs off</title>
+<image placement="break" href="lxce_f_se3.jpg" width="450">
+<alt>System Management - configure LPARs off</alt>
+</image>
+</fig>
+</info>
+</step>
+      <step id="fwstp7" rev="i1v2">
+<cmd>Select all LPARs, where this adapter is configured online (if any), as shown in <xref
+href="#l31xce00_config_fw_cex4p/l31xce00_cex4p3" format="dita"/>.</cmd>
+<info>The Crypto Express adapter must be configured offline in all LPARs, before you can change the
+configuration type. For this purpose, specify <cmdname>Toggle</cmdname> from the <uicontrol>Select
+Action</uicontrol> pull-down  to toggle to the desired state and then press
+<uicontrol>OK</uicontrol> to apply the change. In the next dialog, you need to confirm your intended
+action, because this could be disruptive for processes from the affected LPARs. <p>Finally, you
+return to the view shown in <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p2" format="dita"/>.
+You see the selected adapter stopped now.</p></info>
+</step>
+      <step>
+<cmd>Navigate back to the <uicontrol>System Management</uicontrol> window (<xref
+href="#l31xce00_config_fw_cex4p/l31xce00_cex4p1" format="dita"/>). Now scroll down and select
+<uicontrol>Cryptographic Configuration</uicontrol> from the <uicontrol>Configuration</uicontrol>
+menu on the right hand side.</cmd>
+<info>This leads you to the figure shown in <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p4"
+format="dita"/>. <fig expanse="column" id="l31xce00_cex4p4" rev="i1v2">
+<title>System Management - Cryptographic Configuration</title>
+<image placement="break" href="lxce_f_se4.jpg" width="550">
+<alt>System Management - Cryptographic Configuration</alt>
+</image>
+</fig>
+</info>
+</step>
+      <step>
+        <cmd>Select the desired adapter again (see <xref href="#l31xce00_config_fw_cex4p/fwstp4"
+            format="dita">step 4</xref>).</cmd>
+        <info>Now press <uicontrol>Crypto Type Configuration</uicontrol> from the dialog shown in
+<xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p4" format="dita"/>. This selection brings you to
+the dialog shown in <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p5" format="dita"/>.<fig
+expanse="column" id="l31xce00_cex4p5" rev="i1v2">
+<title>System Management - Crypto Type Configuration</title>
+<image placement="break" href="lxce_f_se5.jpg" width="450" height="400">
+<alt>System Management - Crypto Type Configuration</alt>
+</image>
+</fig></info>
+      </step>
+      <step>
+<cmd>Select <uicontrol>EP11 Coprocessor</uicontrol> and press <uicontrol>OK</uicontrol>.</cmd>
+<info>This action makes the adapter to become a <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter that is upgraded with the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware. Also note, that TKE commands are always
+permitted for a <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter, so that it
+can communicate with the TKE daemon <term>ep11TKEd</term>.</info>
+</step>
+      <step>
+<cmd>You must now select those LPARs that you want to allow to access and use the reconfigured
+adapter. For these LPARs, you need to configure back online the reconfigured adapter.</cmd>
+<info>Therefore, go to the dialog shown in <xref href="#l31xce00_config_fw_cex4p/l31xce00_cex4p3"
+format="dita"/>, now toggling the status of the adapter for the LPAR back to online.</info>
+</step>
+      <step rev="i1">
+<cmd>A restart of <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> or the LPAR is required
+to activate the reconfiguration.</cmd>
+<info rev="i2">For <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/>, check before, that the
+correct definitions have been applied to the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/> coprocessor card. Also for the LPARs, on <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/>
+and on <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/>, you must add the reconfigured
+adapter to the activation profile. Now deactivate and activate the LPAR. Then perform an IPL of
+<keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> on that LPAR, respectively perform an IPL
+of <keyword conref="lxce_conref.dita#l31xce00_conref/zvm"/> and then start the guests using the
+reconfigured adapter.</info>
+</step>
+<step>
+        <cmd>Optionally, you can use the <cmdname>chzcrypt</cmdname> command to enable (online
+          state) and disable (offline state) the <tm tmtype="reg" trademark="IBM">IBM</tm> crypto
+          adapter:</cmd>
+        <info>
+          <screen>$ chzcrypt -e 0x06    // set card06 online
+$ chzcrypt -d 0x06    // set card06 offline</screen>
+          <p>For more information about the <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>
+crypto adapter, see <ph conref="lxcommon.dita#pubs/cit-zl-dd"/> available at
+<codeblock><xref conref="lxcommon.dita#links/dev_doc_url"/></codeblock></p>
+        </info>
+      </step>
+</steps>
+    <result>Now that the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware has been
+enabled on your <keyword conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/>, this card turned
+into a so called <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> coprocessor which
+can take advantage of the <keyword conref="lxce_conref.dita#l31xce00_conref/linuxonz"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> enablement. To check the capability of a
+configured adapter, you can use the following <cmdname>lszcrypt -c &lt;card-number></cmdname>
+command:<screen>$ lszcrypt -c 03
+card03 provides capability for:
+EP11 Secure Key</screen><note othertype="Notes" type="other"><ol>
+<li>If you work with the available session modes (strict session mode or virtual HSM mode) as
+described in <xref href="lxce_limiting_usability.dita#l31xce00_limiting_usability"/>, a unique
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11session"/> ID is generated for each session
+and is stored as a pin-blob (binary large object) on the coprocessor domain. A <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> offers storage for up to 1024 nonces or
+pin-blobs (binary large objects), shared among all defined domains on the
+coprocessor.</li>
+<li rev="iv3">If multiple <keyword conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/> in your
+environment are configured with different levels of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware (module part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> library), then the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> only provides those features that the lowest
+<keyword conref="lxce_conref.dita#l31xce00_conref/cexallpshort"/> provides.</li>
+</ol></note></result>
+</taskbody>
+</task>
+<?Pub *0000003306?>

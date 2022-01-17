@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<reference id="l31xce00_trouble_ddstatus" xml:lang="en-us">
+ <title>Checking the device driver status</title>
+ <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+ <?Pub Caret -2?>
+ <titlealts>
+  <navtitle>Checking the device driver status</navtitle>
+  <searchtitle> Checking the device driver status</searchtitle>
+ </titlealts>
+ <shortdesc> The first step of  troubleshooting while working with the <keyword
+   conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/> may be to check the device driver
+  status as described in this topic.</shortdesc>
+ <prolog>
+  <metadata>
+   <keywords>
+    <indexterm>device driver status<indexterm>checking</indexterm></indexterm>
+    <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver
+      status<indexterm>checking</indexterm></indexterm>
+    <indexterm>checking the device driver status</indexterm>
+    <indexterm>lszcrypt</indexterm>
+   </keywords>
+  </metadata>
+ </prolog>
+ <refbody>
+  <section>
+   <p>Use the <cmdname>lszcrypt</cmdname> command like shown to retrieve basic status information.
+Type <cmdname>lszcrypt -V</cmdname> to achieve an output similar to the following:</p>
+   <p>
+    <screen rev="i1v2" scale="80"># lszcrypt -V
+
+CARD.DOMAIN TYPE  MODE        STATUS  REQUEST_CNT   ...  REQUESTQ_CNT HW_TYPE Q_DEPTH FUNCTIONS
+------------------------------------------------------------------------------------------------
+02          CEX6A Accelerator online         6895                   0      11      08 0x6a000000
+02.004c     CEX6A Accelerator online         6895                   0      11      08 0x6a000000
+03          CEX6C CCA-Coproc  online         4627                   0      11      08 0x92000000
+03.004c     CEX6C CCA-Coproc  online         4627                   0      11      08 0x92000000
+05          CEX6P EP11-Coproc online         2284                   0      11      08 0x06000000
+05.004c     CEX6P EP11-Coproc online         2284                   0      11      08 0x06000000</screen>
+    <codeblock/>
+   </p>
+   <p>This call can be used to check whether the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> requests are sent to a specific crypto adapter.</p>
+   <p>For more information about using <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>
+cryptographic adapters with <ph conref="lxcommon.dita#phrases/ph_loz_and_lone"/>, see <ph
+conref="lxcommon.dita#pubs/cit-zl-dd"/> available at
+<codeblock><xref conref="lxcommon.dita#links/dev_doc_url"/></codeblock></p>
+  </section>
+ </refbody>
+</reference>
+<?Pub *0000006698?>

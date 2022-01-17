@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN" "ibm-topic.dtd">
+<topic id="new_for_30" xml:lang="en-us" rev="i1v2">
+<title>Updates for the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.10
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> type</title>
+<prolog>
+<metadata>
+<keywords>
+<indexterm>summary of changes<indexterm>updates for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.10 <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></indexterm></indexterm>
+</keywords>
+</metadata>
+</prolog>
+<body>
+<p>The following enhancements are implemented for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"/> for  <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.10: </p>
+<ul>
+<li>All mechanisms provided by the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+type that are defined in <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> v2.40 are now
+supported. See <xref href="lxce_mechanisms.dita#l31xce00_mechanisms/ep11_table_mechanisms"/> for a
+complete list of supported mechanisms for the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. <p>However, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> still supports the CKM_ECDH1_DERIVE mechanism
+according to <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> v2.20 (without key
+derivation function (KDF) and shared data).</p></li>
+<li>You can activate one or two session modes to limit the access to cryptographic objects in order
+to improve security. The available session modes are the <term>strict session mode</term> or the
+<term>virtual HSM (VHSM) mode</term>. <p>In <term>strict session mode</term>, for each new session,
+a unique <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> session ID is generated. This
+prevents that a session key (if copied from a session) will be handled as a valid key by the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto adapter even after the PKCS#11
+session that generated the key has ended. </p><p>In <term>virtual HSM (VHSM) mode</term>, you can
+restrict keys to only that token that was used to generate it. </p><p>You can configure an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> to use either one of the available modes, or
+both. </p></li>
+<li>You can now set an option that makes CK_TRUE the default value for the CKA_SENSITIVE attribute
+when generating, unwrapping, or building secret keys with <apiname>C_CreateObject</apiname>. This
+eliminates a restriction with using <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+library functions from earlier versions.</li>
+<li>The list of mechanisms returned by the <apiname>C_GetMechanismList</apiname> function is now
+filtered according to the (domain) control points configured in the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cryptocoproc"/>. </li>
+<li>You can now import keys of type CKK_DH, CKK_DSA, and CKK_EC. See  <xref
+href="lxce_importing_keys.dita#l31xce00_importing_keys"/> for more information.</li>
+<li>The error handling when using <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> library
+functions is enhanced: <ul>
+<li>User-friendly messages are issued into the SYSLOG during token initialization, when no
+CK_SESSION_INFO structure is available for providing meaningful reason codes.</li>
+<li>The use of return codes is adapted to better comply to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> standard. </li>
+</ul>
+</li>
+<li><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> now supports multiple token
+instances of the same token type. This edition documents what to do to exploit this support for
+multiple tokens of type <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>.</li>
+<li>Starting with <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> library version 2.0, as
+the default, the TKE uses the <term>ep11TKEd</term> daemon to authenticate with a <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> user who is member of a new <term>ep11tke
+group</term>, which is created during <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+package installation.</li>
+<li>New tools are described in <xref href="lxce_tools.dita#lxce_tools"/>: <ul>
+<li><cmdname>ep11info</cmdname> provides information about <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/> and about configured domains.</li>
+<li>
+<cmdname>pkcsep11_session</cmdname> allows to delete an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11session"/> from <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11coprocs"/> left over by programs that did not terminate
+normally.</li>
+</ul></li>
+</ul>
+</body>
+</topic>
+<?Pub *0000001545?>

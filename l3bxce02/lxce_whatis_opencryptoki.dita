@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_whatis_opencryptoki" xml:lang="en-us">
+<title>What is <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>?</title>
+<!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>What is <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>?</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> What is <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>?</searchtitle>
+</titlealts><abstract><shortdesc><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> is an open source
+implementation of the <term>Cryptoki</term> API defined by the <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> Cryptographic Token Interface Standard.
+</shortdesc>Thus, <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> provides support for
+several cryptographic algorithms according to the industry-wide <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> standards. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> library loads the so called tokens that provide
+hardware or software specific support for cryptographic functions.</abstract>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></indexterm><indexterm>CEX4S</indexterm><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/><indexterm> shared library (C
+API)</indexterm></indexterm><indexterm>C API</indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> extends the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> token library. It uses special hardware
+cryptographic functions that are provided by <ph rev="i1v2">an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> Crypto Express adapter (starting with CEX4S),</ph>
+which is configured by a certain firmware (see <xref
+href="lxce_config_fw_cex4p.dita#l31xce00_config_fw_cex4p"/>).</p><?Pub
+Caret 204?>
+<p><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> can be used
+<!--either with the IBMPKCS11Impl provider (Java API, see <xref href="lxce_configuring_pkcs11impl.dita#l31xce00_configuring_pkcs11impl"/>) or-->
+directly through the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> shared library (C
+API).</p>
+<p>For more information about the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+services, or about the interfaces between the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> main module and its tokens, see
+<codeblock><xref conref="lxce_conref.dita#links/ock_github"/>.
+</codeblock></p>
+<p>You can also read topic <xref href="lxce_stackoverview.dita#ep11_stackoverview"/> for an
+introduction of the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> main features.</p>
+</conbody>
+</concept>
+<?Pub *0000003393?>

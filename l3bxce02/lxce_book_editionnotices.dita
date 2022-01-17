@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_book_editionnotices" xml:lang="en-us">
+<title>Edition notice</title>
+<prolog><metadata></metadata></prolog>
+<body id="ic_starting_page">
+<p rev="iv3">This edition applies to the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+host library version 3.0 which covers the latest features of <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> version 3.15, and to all subsequent versions and
+modifications until otherwise indicated in new editions.</p><?Pub Caret 89?>
+</body>
+</topic>
+<?Pub *0000000612?>

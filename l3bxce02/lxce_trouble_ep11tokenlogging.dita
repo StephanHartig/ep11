@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE reference PUBLIC "-//IBM//DTD DITA IBM Reference//EN"
+ "ibm-reference.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<reference id="l31xce00_trouble_ep11tokenlogging" xml:lang="en-us">
+    <title>Enabling the logging support while running the <keyword
+            conref="lxce_conref.dita#l31xce00_conref/ep11token"/>
+    </title>
+    <!--SH: Acrolinx run on Apr. 11, 2014, remaining flags cannot be avoided-->
+    <titlealts>
+        <navtitle>Enabling the logging support while running the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ep11token"/></navtitle>
+        <searchtitle>Enabling the logging support while running the <keyword
+                conref="lxce_conref.dita#l31xce00_conref/ep11token"/></searchtitle>
+    </titlealts>
+    <shortdesc>Read about the tasks how to run the <keyword
+            conref="lxce_conref.dita#l31xce00_conref/ep11token"/> with enabled logging
+        support.</shortdesc>
+    <prolog>
+        <metadata>
+            <keywords>
+                <indexterm>logging support</indexterm>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+                        /><indexterm>logging support</indexterm></indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    <refbody>
+        <section>
+            <p rev="i1v2">You can enable logging support by setting the environment variable
+<codeph>OPENCRYPTOKI_TRACE_LEVEL</codeph>. If the environment variable is not set, logging is
+disabled by default.</p>
+        </section>
+ <table id="ep11_table_log" rev="i1v2">
+ <title><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> log levels</title>
+ <desc>
+ <p outputclass="summary" platform="">Table with two columns.</p>
+ </desc>
+ <tgroup cols="2">
+ <colspec colname="col1" colwidth="1*"/>
+ <colspec colname="col2" colwidth="5*"/>
+ <thead>
+ <row>
+ <entry>Log level</entry>
+ <entry>Description</entry>
+ </row>
+ </thead>
+        <tbody>
+        <row>
+        <entry>1</entry>
+        <entry>Log error messages.</entry>
+        </row>
+        <row>
+        <entry>2</entry>
+        <entry>Log warning messages.</entry>
+        </row>
+        <row>
+        <entry>3</entry>
+        <entry>Log informational messages.</entry>
+        </row>
+         <row>
+        <entry>4</entry>
+         <entry>Log development debug messages. These messages may help debug while developing
+<keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> applications.</entry>
+        </row>
+        <row>
+        <entry>5</entry>
+        <entry>Log debug messages that are useful to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> developers. This level must be enabled via
+option <codeph>--enable-debug</codeph> in the <cmdname>configure</cmdname> script.</entry>
+        </row>
+        </tbody>
+        </tgroup>
+        </table>
+        <section>
+            <p rev="i1v2">If a log level > 0 is defined in the environment variable
+<codeph>OPENCRYPTOKI_TRACE_LEVEL</codeph>, then log entries are written to file
+            <codeph>/var/log/opencryptoki/trace.&lt;pid&gt;</codeph>. In this file name specification,
+<codeph>&lt;pid&gt;</codeph> denotes the ID of the running process that uses the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>.</p>
+            <p>The log file is created with ownership <term>user</term>, and group
+                    <term>pkcs11</term>, and permission 640 (user: read, write; group: read only;
+                others: nothing). For every application, which is using <keyword
+                    conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> with the <keyword
+                    conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, a new log file is
+                created during token initialization. Prerequisite for a working EP11 stack is the
+                existence of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+                coprocessor card and an appropriate device driver with <keyword
+                    conref="lxce_conref.dita#l31xce00_conref/ep11"/> support.</p>
+            <p>A log level > 3 is only recommended for developers.</p>
+        </section>
+<section>
+<title>How to avoid common mistakes</title>
+<ul>
+<li>Do not configure or use an <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> before
+the master key is set on the associated adapters. Otherwise, token initialization fails and an
+appropriate  syslog message is issued.</li>
+<li>Do not let a user invoke <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> who does
+not belong to the<term> pkcs11 group</term>. Be aware that adding a user to a new group does not
+change the group membership of users that were logged in before.</li>
+</ul>
+<p/>
+</section>
+    </refbody>
+</reference>
+<?Pub *0000002142?>

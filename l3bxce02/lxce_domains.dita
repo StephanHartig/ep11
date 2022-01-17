@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_domains" xml:lang="en-us">
+<title>Purpose of domains</title>
+<!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<titlealts>
+<navtitle>Purpose of domains</navtitle>
+<searchtitle>Purpose of domains</searchtitle><?Pub Caret -1?>
+</titlealts>
+<shortdesc>When you configure your system on the Support Element (SE), you can specify how a logical
+partition (LPAR) uses coprocessors and accelerators. In this context, the Crypto Express cards
+support a concept of cryptographic domains. Each domain is protected by a master key, thus
+preventing access across domains and effectively separating the contained keys. </shortdesc>
+<prolog><metadata>
+<keywords><indexterm>domains</indexterm><indexterm>usage domains</indexterm>
+<indexterm>control domains</indexterm><indexterm>cryptographic domains</indexterm>
+<indexterm>control domain exposure</indexterm><indexterm>logical partition
+(LPAR)</indexterm><indexterm>LPAR</indexterm></keywords>
+</metadata></prolog>
+<conbody>
+<p>For information on how to configure domains, refer to <cite>zEnterprise System Support Element
+Operations Guide</cite>, which you can download from the <xref format="pdf"
+href="https://www.ibm.com/servers/resourcelink/svc03100.nsf/pages/zResourceLinkUrl?OpenDocument&amp;url=http://www.ibm.com/servers/resourcelink/lib03010.nsf/0/00373B9974F6CDB8852577610069E8BF/$File/SC28-6896-02.pdf"
+scope="external">IBM Resource Link</xref>.</p>
+<p>There are two types of access to a cryptographic domain:</p>
+<ul>
+<li>for usage of cryptographic functions </li>
+<li>for management (control) of the domain, which includes the management of the master keys </li>
+</ul>
+<p>A domain, which is assigned to an LPAR for usage access is called a usage domain of that LPAR. A
+domain, which is assigned to an LPAR for management (control) access is called a control domain of
+that LPAR. Every domain, which is a usage domain of an LPAR must also be a control domain of that
+LPAR, but not the other way round.</p>
+<section id="l31xce00_usagedom">       <title>Usage domains</title>
+     <p>A logical partition's <term>usage domains</term> are domains in the coprocessors that can be
+used for cryptographic functions.</p>
+<p>In <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/>, you can use the <cmdname>lszcrypt
+-b</cmdname> command to find out which usage domain is configured for that <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> system:</p>
+<screen>$ lszcrypt -b
+
+<ph rev="i1v2">ap_domain=0x1a
+ap_max_domain_id=0x54</ph>
+ap_interrupts are enabled
+config_time=30 (seconds)
+poll_thread is disabled
+poll_timeout=250000 (nanoseconds)</screen>
+   </section>
+<section id="l31xce00_controdom">       <title>Control domains</title>
+     <p>A logical partition's <term>control domains</term> are those cryptographic domains for which
+remote secure administration functions can be established and administered from this logical
+partition.</p>
+     <p>This logical partition's control domains must include its usage domains. So for each index
+that is selected in the <term>Usage domain index</term> list, you must select the same index in the
+<term>Control domain index</term> list.</p>       <p>But a logical partition's control domains can also include the control domains of other
+logical partitions. Assigning multiple logical partitions' control domains as control domains of a
+single logical partition allows using the partition to  perform administrative functions from the
+TKE .</p>       <p>If you are using the Integrated Cryptographic Service Facility (ICSF) <ph rev="i2">from
+z/OS</ph>, select at least one control domain with its matching usage domain. Refer to the ICSF
+documentation for information about ICSF basic operations.</p>
+     <p rev="i2">If you are using a Trusted Key Entry (TKE) workstation to manage cryptographic
+keys, you can define your TKE host and the control domains for a logical partition. See <xref
+href="lxce_setting_mk.dita#l31xce00_setting_mk"/> for more information.</p>
+   </section>
+<section><title>Control domain exposure</title><indexterm>TKE
+workstation</indexterm><indexterm>Trusted Key Entry workstation</indexterm><p>For configuration and
+management purposes the TKE needs to know which control domains are configured on the system.
+</p><p>In <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/>, use a <codeph>sysfs</codeph>
+attribute called <codeph>ap_control_domain_mask</codeph> in <filepath>/sys/bus/ap/</filepath> to
+display the configured control domains. This information is set automatically from the device
+driver.</p><p>The attribute <codeph>ap_control_domain_mask</codeph> is read-only and contains a
+32-byte field in hexadecimal notation, representing the installed control domain facilities. Each
+bit position represents a dedicated control domain. Thus, a maximum number of 256 domains could be
+addressed.</p></section>
+<example><b>Example:</b><lines>cat /sys/bus/ap/ap_control_domain_mask
+0x0004000000000000000000000000000000000000000000000000000000000000</lines></example>
+<section><dl rev="i1v2">
+<dlhead>
+<dthd>Byte</dthd>
+<ddhd>Meaning</ddhd>
+</dlhead>
+<dlentry>
+<dt>1</dt>
+<dd>domain 0-7</dd>
+</dlentry>
+<dlentry>
+<dt>2</dt>
+<dd>domain 8-15</dd>
+</dlentry>
+<dlentry>
+<dt>...</dt>
+<dd>...</dd>
+</dlentry>
+</dl>       <p>In this example, the control domain 13 was configured.</p>     </section>
+</conbody>
+</concept>
+<?Pub *0000004943?>

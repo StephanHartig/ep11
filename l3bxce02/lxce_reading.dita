@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_reading" xml:lang="en-us">
+<title>Finding <tm tmtype="reg" trademark="IBM">IBM</tm> publications</title>
+<prolog><metadata>
+<keywords><indexterm>IBM publications</indexterm><indexterm>publications<indexterm>IBM</indexterm></indexterm>
+</keywords><?Pub Caret 35?>
+</metadata></prolog>
+<body>
+<p>The PDF version of this publication contains URL links to much
+of the referenced literature.</p>
+<p>For some of the referenced <tm tmtype="reg" trademark="IBM">IBM</tm> documents,
+links have been omitted to avoid pointing to a particular edition
+of a publication. You can locate the latest versions of the referenced <tm
+tmtype="reg" trademark="IBM">IBM</tm> books through the <tm tmtype="reg"
+trademark="IBM">IBM</tm> Publications Center at: <codeblock><xref
+format="html" href="http://www.ibm.com/shop/publications/order"
+scope="local">http://www.ibm.com/shop/publications/order</xref></codeblock></p>
+</body>
+</topic>
+<?Pub *0000001143?>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE dita PUBLIC "-//IBM//DTD DITA IBM Composite//EN"
+ "ibm-ditabase.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<dita xml:lang="en-us">
+<topic id="icons">
+<title>Icons</title>
+<body>
+<ul>
+<li>
+<image id="icon_l" href="lpar.jpg" height="15">
+<alt>LPAR mode</alt>
+</image></li>
+<li>
+<image id="icon_z" href="zvm.jpg" height="15">
+<alt>z/VM guest</alt>
+</image></li>
+<li>
+<image id="icon_k" href="kvm.jpg" height="15">
+<alt>KVM guest</alt>
+</image></li>
+</ul>
+</body>
+</topic>
+<?tm 1344264666 148?>
+</dita>
+<?Pub *0000032506?>

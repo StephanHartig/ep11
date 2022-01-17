@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_stack" xml:lang="en-us">
+<title>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack</title>
+<titlealts>
+<navtitle>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack</navtitle>
+<searchtitle><keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/>: The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack</searchtitle>
+</titlealts>
+  <!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+<shortdesc>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack for <keyword
+conref="lxce_conref.dita#l31xce00_conref/linuxonz"/> consists of various components within the
+different layers: An application sends a request down to the hardware (cryptographic adapter), via
+the device driver and the firmware. The request is routed all the layers down and back again, and
+the request result is returned to the application. The stack thus provides an end-to-end solution
+for cryptographic operations.</shortdesc>
+<prolog><metadata>
+<keywords><indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack</indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware</indexterm><indexterm>stack</indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> extension</indexterm>
+        <indexterm>device driver<indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+extension</indexterm></indexterm>
+        <indexterm>stack</indexterm>
+    <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"/></indexterm><indexterm>crypto stack</indexterm>
+    <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/><indexterm>host
+part</indexterm><indexterm>module part</indexterm></indexterm>
+    <indexterm>host part</indexterm>
+    <indexterm>module part</indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device
+driver</indexterm>
+        <indexterm>stack and process flow</indexterm>
+        <indexterm>process flow</indexterm>
+        <indexterm>dependencies</indexterm>
+        <indexterm>RPM</indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"
+/><indexterm>dependencies</indexterm></indexterm>
+</keywords>
+</metadata></prolog>
+<conbody>
+<p>For example, an application sends an encryption request to the crypto adapter. Through various
+interfaces, such a request is propagated from the application layer down to the target crypto
+adapter hardware. On its way down, the request passes through the involved layers: the standard
+crypto interfaces, the <ph conref="lxcommon.dita#phrases/ph_ibmz"/> crypto libraries, and the
+operating system kernel. The <keyword conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device
+driver finally sends the request to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>. The resulting request output is sent back
+to the application just the other way round through the layer interfaces. </p>
+<p>
+<xref format="dita" href="#l31xce00_stack/f_ep11_overview"/> illustrates the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> crypto stack within the <keyword
+conref="lxce_conref.dita#l31xce00_conref/linuxonz"/> environment. The components that make up the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> are highlighted:</p>
+<ul>
+<li>the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> within <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/></li>
+<li>the host part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> (located in
+user space, which is named <codeph>libep11.so</codeph>). <ph rev="i1v2">In version 2.0,
+<codeph>libep11.so</codeph> is a symbolic link to the versioned library
+<codeph>libep11.so.2</codeph> and this in turn is a symbolic link to
+<codeph>libep11.so.2.0.0</codeph>.</ph>
+</li>
+<li>the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> extension of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver. This extension was included with
+kernel level 3.14 on <xref href="https://www.kernel.org/" format="html" scope="external"/>. Note
+that distributions sometimes back-port features from newer <term>kernel.org</term> kernels into
+their current kernel versions. Therefore check with your distribution partner, whether your
+distribution release supports the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat_short"
+/>, if its kernel version is older than 3.14.</li>
+<li>the module part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>, that is,
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware that is installed on the
+<keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/> adapter hardware.</li>
+</ul>
+<p><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> can be used directly through the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> shared library (C API).</p>
+<p><keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> supports several token types, which
+can offer different functionality for different hardware devices or software solutions. Tokens of
+type <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> (aka <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11tokens"/>) interact with the host part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>. <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> can operate with the Crypto Express adapter
+(<keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/>) with <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware load for processing cryptographic
+functions.</p>
+<fig id="f_ep11_overview" rev="i1v2">
+<title>Stack and process flow with a configured <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></title>
+<image href="lxce_overview.jpg" placement="break" height="800" width="500">
+<alt>Stack and process flow with a configured <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/></alt>
+</image>
+</fig>
+<p>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> itself does not implement
+<keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> but provides services for accessing
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> functions to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>. For a description of these services or the
+interface between the common part of <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/>
+and its tokens, see the <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> documentation.
+Once the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> is configured, cryptographic
+functions from the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/> are available to
+an application through the <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> API provided
+by the common <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> code. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> itself accesses the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> is divided into the host part and the module
+part, which runs in the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallplong"/>. An
+installed <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> is a prerequisite for
+enabling <keyword conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> to use the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> passes requests to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/cexallpshort"/> through the <keyword
+conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver of <keyword
+conref="lxce_conref.dita#l31xce00_conref/linuxonz"/>.</p>
+<p><ph rev="i1v2">The host part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/>
+creates cryptographic requests from the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"
+/> in Abstract Syntax Notation One (ASN.1). These requests are sent to and understood by the
+<keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter.</ph> The host part also
+converts response buffers that are received from the adapter into data structures that are expected
+by the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>. The <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> makes these APIs accessible to <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> and thus the applications, but does not
+implement any cryptographic mechanism. The mechanisms available and their parameters depend on the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> implementation (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> and <keyword
+conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> card) and its configuration. The <xref
+conref="lxce_conref.dita#links/pkcs11_standard_url"/> defines methods for inquiring available
+mechanisms. <ph rev="i1v2">You can obtain an inquiry of all available mechanisms and their
+parameters using the <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> functions
+<apiname>C_GetMechanismList</apiname> and <apiname>C_GetMechanismInfo</apiname>.</ph></p>
+<p>Besides the <keyword conref="lxce_conref.dita#l31xce00_conref/cex_all_p"/> adapter that is loaded
+with the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> firmware (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> module part), the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> furthermore requires a <keyword
+conref="lxce_conref.dita#l31xce00_conref/zcrypt"/> device driver within the kernel, extended with
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> support (see <xref
+href="lxce_installing_zcrypt.dita#l31xce00_installing_zcrypt"/>). In addition, the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/> requires the availability of the host part of
+the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> library.</p>
+<p>Therefore, check the following dependencies:<ul>
+<li><b>Dependencies on distributors: </b> Distributors build the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ocrypto"/> RPM <ph rev="i1v2">and DEB</ph> packages that
+comprise the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> support (<keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11token"/>) for delivering them to customers. <ph
+rev="i1v2">Generally the distributors provide two packages, one library package and one development
+package.</ph> See also <xref href="lxce_installing_ocryptoki.dita#l31xce00_installing_ocryptoki"
+/>.</li>
+<li><b>Dependencies on hardware:</b> The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+library functions run on the <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/zEnterprise12"/> (zEC12) processor family
+(processor types 2827-H20, -H43, -H66, -H89, -HA1) or follow-on processors with an <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> Crypto Express4S (CEX4S) or follow-on adapter.</li>
+</ul></p>
+<note>In the remainder of this publication, the terms <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> or <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> stand for the entirety of the implementation
+components that consists of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11token"/>, <ph
+rev="i2">the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> extension of the
+<term>zcrypt</term> device driver,</ph> and the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> (host part and module part) as shown in <xref
+href="#l31xce00_stack/f_ep11_overview"/>.</note>
+<?Pub Caret 197?>
+</conbody>
+</concept>
+<?Pub *0000004141?>

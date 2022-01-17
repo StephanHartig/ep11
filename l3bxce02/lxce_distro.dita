@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE topic PUBLIC "-//IBM//DTD DITA IBM Topic//EN"
+ "ibm-topic.dtd">
+<?Pub Sty _display FontColor="red"?>
+<topic id="l31xce00_distro" xml:lang="en-us">
+<title>Distribution independence</title>
+<shortdesc>This publication does not provide information that is specific
+to a particular <keyword conref="lxce_conref.dita#l31xce00_conref/linux"></keyword>
+distribution. </shortdesc><?Pub Caret 81?>
+<prolog><metadata>
+<keywords><indexterm>distribution independence</indexterm><indexterm>Linux<indexterm>distribution</indexterm></indexterm>
+</keywords>
+</metadata></prolog>
+<body>
+<p>The tools it describes are distribution independent.</p>
+</body>
+</topic>
+<?Pub *0000000750?>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN"
+ "ibm-map.dtd">
+<?Pub Sty _display FontColor="red"?>
+<!-- master file for the EP11 Knowledge Center plugin:
+                It contains one wrapping topicref (lxce_usingep11.dita) as a first-level entry into the KC.
+                This wrapping topicref just wraps a reference (lxce_body.ditamap) to the body content of
+                the publication    -->
+<?Pub Caret 244?>
+<map id="ep11_token" title="Exploiting Enterprise PKCS #11 using openCryptoki 3.17" xml:lang="en-US">
+<topicref href="lxce_usingep11.dita">
+<topicref href="lxce_pdf.dita"/>
+<topicref href="lxce_soc.dita">
+<!--Keep only the three most current.-->
+<topicref href="lxce_new_for_ock312.dita"/>
+<topicref href="lxce_new_for_ock310.dita"/>
+</topicref>
+<mapref href="l3bxce02_body.ditamap"></mapref>
+</topicref>
+</map>
+<?Pub *0000000729?>

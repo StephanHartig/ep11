@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<concept id="l31xce00_whatis_pkcs11" xml:lang="en-us">
+    <title>What is <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>?</title>
+    <!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+    <titlealts>
+        <navtitle>What is <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>?</navtitle>
+        <searchtitle>What is <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"
+/>?</searchtitle>
+    </titlealts>
+    <abstract>
+        <shortdesc>The <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs_long"/> (PKCS)
+comprise a group of cryptographic standards that provide guidelines and application programming
+interfaces (APIs) for the usage of cryptographic methods. As the name PKCS suggests, these standards
+put an emphasis on the usage of public key (that is, asymmetric) cryptography.</shortdesc>
+    </abstract>
+    <prolog>
+        <metadata>
+            <keywords>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/></indexterm>
+                <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs_long"
+/></indexterm>
+                <indexterm>Cryptoki</indexterm>
+                <indexterm>token</indexterm>
+                <indexterm>cryptographic token</indexterm>
+                <indexterm>public key cryptography</indexterm>
+                <indexterm>asymmetric cryptography</indexterm>
+                <indexterm>cryptography<indexterm>asymmetric</indexterm><indexterm>public
+                        key</indexterm></indexterm>
+            </keywords>
+        </metadata>
+    </prolog>
+    <conbody>
+        <p><b><keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/></b> is a cryptographic
+token interface standard, which specifies an API, called <term>Cryptoki</term>. With this API,
+applications can address cryptographic devices as tokens and can perform cryptographic functions as
+implemented by these tokens. This standard, first developed by the RSA Laboratories in cooperation
+with representatives from industry, science, and governments, is now an open standard lead-managed
+by the <cite>OASIS PKCS 11 Technical Committee</cite>.</p>
+        <p>It follows an object-based approach, addressing the goals of technology independence (any
+kind of HW device) and resource sharing. It also presents to applications a common, logical view of
+the device that is called a cryptographic <term>token</term>. <keyword
+conref="lxce_conref.dita#l31xce00_conref/pkcs11"/> assigns a slot ID to each token. An application
+identifies the token that it wants to access by specifying the appropriate slot ID.</p>
+        <p>For more information about <keyword conref="lxce_conref.dita#l31xce00_conref/pkcs11"/>,
+refer to this URL: </p>
+        <p><codeph><xref conref="lxce_conref.dita#links/pkcs11_standard_url"/></codeph></p>
+    </conbody>
+</concept>

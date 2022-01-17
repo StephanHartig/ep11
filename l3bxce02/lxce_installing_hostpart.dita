@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE task PUBLIC "-//IBM//DTD DITA IBM Task//EN"
+ "ibm-task.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<task id="l31xce00_installing_hostpart" xml:lang="en-us">
+  <title>Installing the host part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"
+/></title>
+  <!--SH: Acrolinx run on Apr. 10, 2014, remaining flags cannot be avoided-->
+  <?Pub Caret -1?>
+  <titlealts>
+    <navtitle>Installing the host part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/></navtitle>
+    <searchtitle>Installing the host part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/></searchtitle>
+  </titlealts>
+  <shortdesc>Read the contained information about how to install the host part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> as a component of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11stack"/>.</shortdesc>
+  <prolog>
+    <metadata>
+      <keywords>
+        <indexterm>host part <indexterm>installing</indexterm></indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> host part
+<indexterm>installing</indexterm></indexterm>
+        <indexterm>TKE daemon</indexterm>
+        <indexterm>daemon <indexterm>TKE <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/></indexterm><indexterm>start</indexterm><indexterm>ep11TKEd</indexterm><indexterm>install</indexterm></indexterm>
+<indexterm>ep11TKEd daemon <indexterm>TKE <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"
+/></indexterm><indexterm>start</indexterm><indexterm>install</indexterm></indexterm>
+        <indexterm><keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> TKE daemon</indexterm>
+        <indexterm>installing <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> host
+part</indexterm>
+<indexterm>PAM<indexterm>pluggable authentication modules</indexterm></indexterm>
+<indexterm>pluggable authentication modules<indexterm>PAM</indexterm></indexterm>
+<indexterm>sticky bit</indexterm>
+<indexterm>shadow group</indexterm>
+      </keywords>
+    </metadata>
+  </prolog>
+  <taskbody>
+    <context>As a part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11stack"/>, you
+need to install the host part of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> on
+your <ph conref="lxcommon.dita#phrases/ph_ibmz"/>, as shown in <xref
+href="lxce_stack.dita#l31xce00_stack/f_ep11_overview"/>. <p>Also, to use the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> functionality, the TKE daemon
+(<term>ep11TKEd</term>) must be available and running to perform certain communication tasks. This
+communication path is necessary, for example, for the initial key personalization or for key updates
+(see also <xref href="lxce_setting_mk.dita#l31xce00_setting_mk"/>).</p></context>
+    <steps rev="i1v2">
+<step id="ep11step1">
+<cmd>Obtain the appropriate <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> software
+package for use on <ph conref="lxcommon.dita#phrases/ph_ibmz"/> mainframe servers, that contains the
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11feat"/> from the software package selection
+page: </cmd>
+<info>
+<codeblock><xref href="https://www.ibm.com/security/cryptocards/pciecc3/lonzsoftware.shtml" format="shtml" scope="external"/></codeblock>
+RPM is the installation package format for Red Hat Enterprise Linux and SUSE Linux Enterprise Server
+distributions. DEB is the package format for the Ubuntu distribution. The names of the packages are
+as follows: <ul>
+<li><codeph>ep11-host-2.0.0-2.s390x.rpm</codeph> or later is the standard RPM package that provides
+libraries (<codeph>libep11.so</codeph>) and tools (for example, the <cmdname>ep11info</cmdname>
+tool) to configure and use a <keyword conref="lxce_conref.dita#l31xce00_conref/cexallpshort"/>.</li>
+<li><codeph>libep11_2.0.0-2_s390x.deb</codeph> or later is the equivalent Ubuntu package.</li>
+<li><codeph>ep11-host-devel-2.0.0-2.s390x.rpm</codeph> or later is the development RPM package which
+is required if you want to develop programs that link to the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11"/> library. </li>
+<li><codeph>libep11-dev_2.0.0-2_s390x.deb</codeph> or later is the equivalent Ubuntu package.</li>
+</ul><p>To see a complete list of files contained in the packages, you can download the associated
+<filepath>RELEASE.txt</filepath> file from the <xref
+href="https://www.ibm.com/security/cryptocards/pciecc4/lonzsoftware" format="html"
+scope="external">software-package selection page</xref>.</p><note>The host part of the <keyword
+conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> is developed and maintained by <keyword
+conref="lxce_conref.dita#l31xce00_conref/ibm"/> and therefore not part of any commercial <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> distribution.</note>
+</info>
+</step>
+<step>
+<cmd>Install the RPM or DEB by issuing one of the following commands:</cmd>
+<info>
+<codeblock>
+rpm -Uvh &lt;rpm_packet>  /* for RPM new installation or updates*/
+dpkg -i &lt;deb_packet>   /* for DEB new installation or updates*/</codeblock>
+</info>
+</step>
+<step>
+<cmd>The <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/atke"/> daemon (<codeph>ep11TKEd</codeph>), which
+comes along with the standard RPM or DEB packages obtained in step <xref
+href="#l31xce00_installing_hostpart/ep11step1" format="dita"/> is also installed during the
+installation. It is required and must be running for handling administrative commands and for
+managing communication between the <keyword conref="lxce_conref.dita#l31xce00_conref/atkews"/> and
+the <keyword conref="lxce_conref.dita#l31xce00_conref/cexallpshort"/>. </cmd>
+</step>
+</steps>
+<postreq id="hostpart_postreq" rev="i1v2">
+<p> Starting with <keyword conref="lxce_conref.dita#l31xce00_conref/ep11lib"/> version 2.0, the TKE
+can use the <term>ep11TKEd</term> daemon to authenticate with a <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> user who is member of the <term>ep11tke
+group</term> which is defined in <filepath>/etc/group</filepath> of the system. This is the default,
+and it is recommended not to change this.</p><p>However, you could disable the authentication in the
+<term>ep11TKEd</term> configuration file as described hereafter.</p><p>The <term>ep11TKEd</term>
+daemon uses the <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> pluggable authentication
+modules (PAM) subsystem to authenticate the user. The interaction with PAM can also be configured in
+a <term>ep11TKEd</term>-specific PAM configuration file.</p><p>
+<b>Software requirements:</b> As of <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+software package 2.0.0, the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> TKE daemon
+requires the OpenSSL library version 1.0.x for secure authentication with the TKE. It also requires
+the PAM standard modules for the authentication process. Refer to your <keyword
+conref="lxce_conref.dita#l31xce00_conref/linux"/> distribution documentation for supported versions
+of OpenSSL.</p><p>The <term>ep11TKEd</term> daemon uses <cmdname>systemd</cmdname> for daemonizing
+and logging. If you do not use <cmdname>systemd</cmdname>, you need to do the daemonizing and
+routing of log messages to files yourself. </p><p>Only TKE versions equal or greater than 8.0 are
+supported with this version of <term>ep11TKEd</term>. </p><p><b>Security notes:</b> The
+<term>ep11TKEd</term> daemon typically runs as the nobody user. For the authentication process,
+<term>ep11TKEd</term> needs privileges to access the shadow file. For those cases,
+<term>ep11TKEd</term> can be a <cmdname>setGID</cmdname> program which uses the shadow group, or a
+<cmdname>setUID to root</cmdname> program to gain access to the file.</p><p>The
+<term>ep11TKEd</term> daemon uses these privileges of the shadow group or the read or search
+capability only through a small window of a running authentication process. Privileges are
+permanently dropped, if authentication is disabled in the configuration file. </p><p>In the host
+package installation process, <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> is checked
+for its capabilities. If the shadow group is found, then the sticky bit for the shadow group is set.
+If the group is not found, the sticky bit for the root user is set.</p><p>If supported by your
+<keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> distribution, <cmdname>AppArmor</cmdname>
+rules are installed. If they are not already enforced for the <term>ep11TKEd</term> daemon, you can
+enforce them manually.</p><p><b>Configuration:</b>
+<note>It is recommended to use the default settings. The configuration features described hereafter
+may be used in special environments.</note></p><ul>
+<li><b><i>Configuration files:</i></b><ul>
+<li>
+<p>The EP11 TKE daemon can be configured in file <filepath>/etc/ep11/ep11tked.conf</filepath>. </p>
+<p>The only allowed option is <cmdname>CipherMode</cmdname>. The two allowed values are <i>AES</i>
+and <i>None</i>. <i>AES</i> is the default value.</p>
+<dl>
+<dlentry>
+<dt><i>AES</i></dt>
+<dd>Use the <keyword conref="lxce_conref.dita#l31xce00_conref/linux"/> PAM system to authenticate a
+user.</dd>
+</dlentry>
+<dlentry>
+<dt><i>None</i></dt>
+<dd>Do not use any authentication.</dd>
+</dlentry>
+</dl>
+<note>If possible, <i>AES</i> should always be used!</note>
+</li>
+<li>The authentication process can be configured in the file
+<filepath>/etc/pam.d/ep11tked</filepath>. See the PAM module manuals for help on editing this file.
+Be careful when changing this file as it involves the risk of rendering the authentication useless.
+<p>The default setting is to allow any user that has a password configured and is member of the
+<term>ep11tke group</term> to gain access through the <term>ep11TKEd</term> daemon.</p></li>
+</ul></li>
+<li><b><i>How to control the daemon:</i></b>
+<p>The program can be started manually by executing the file
+<filepath>/usr/sbin/ep11TKEd</filepath>.</p><p>This starts <term>ep11TKEd</term> in the running
+shell and not as a daemon. Log messages are printed to the console. This is sometimes useful for
+troubleshooting, but usually <term>ep11TKEd</term> should be started through
+<cmdname>systemd</cmdname>: <screen>systemctl start ep11TKEd</screen></p><p>To automatically start
+the daemon during boot use the following command:
+<screen>systemctl enable ep11TKEd</screen></p><p>To disable the automatic start use the following
+command: <screen>systemctl disable ep11TKEd</screen></p><p>See the <cmdname>systemd</cmdname>
+documentation for help with the service manager. When using <cmdname>systemd</cmdname> for
+controlling the daemon, log messages are written to the <cmdname>systemd</cmdname> journal. See the
+<cmdname>journald</cmdname> manual for more information.</p></li>
+</ul><p><b>Restrictions:</b></p>The versions of the <term>ep11TKEd</term> daemon delivered with an
+<keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/> host library starting with version 2.0
+cannot be used on an <keyword conref="lxce_conref.dita#l31xce00_conref/ibm"/>
+<keyword conref="lxce_conref.dita#l31xce00_conref/zEnterprise12"/> (zEC12) system. On these zEC12
+systems, you must use version 1.x of the <keyword conref="lxce_conref.dita#l31xce00_conref/ep11"/>
+package together with the contained <term>ep11TKEd</term> daemon.</postreq>
+  </taskbody>
+</task>
+<?Pub *0000000920?>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Arbortext, Inc., 1988-2011, v.4002-->
+<!DOCTYPE concept PUBLIC "-//IBM//DTD DITA IBM Concept//EN"
+ "ibm-concept.dtd">
+<?Pub Sty _display FontColor="red"?>
+<?Pub Inc?>
+<concept id="l31xce00_configuring_pkcs11impl" xml:lang="en-us">
+ <title>Configuring the PKCS11Impl provider</title>
+ <!--SH: Acrolinx run on Apr. 11, 2014, need to rerun after this information is complete-->
+ <titlealts>
+  <navtitle>Configuring the PKCS11Impl provider</navtitle>
+  <searchtitle>Configuring the PKCS11Impl provider</searchtitle>
+ </titlealts>
+ <shortdesc/>
+ <prolog>
+  <metadata>
+   <keywords>
+    <indexterm>configuring the PKCS11Impl provider</indexterm>
+    <indexterm>PKCS11Impl provider<indexterm>configuring</indexterm></indexterm>
+   </keywords>
+  </metadata>
+ </prolog>
+ <conbody>
+  <p> ... <b>To be decided, if required</b> ...</p>
+  <?Pub Caret -1?>
+  <p> ... <b>Check with Reinhard, whether this should be a an own chapter, see Append 119298in file
+      <b><i>Building the EP11 crypto stack</i></b></b> ...</p>
+  <?Pub Caret -1?>
+ </conbody>
+</concept>
+<?Pub *0000001696?>
